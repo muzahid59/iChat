@@ -109,7 +109,7 @@ class ContactsTableViewController: UITableViewController {
         
         if indexPath.section == Section.currentChannelsSection.rawValue {
             
-            let contact = self.contacts[indexPath.row]
+            var contact = self.contacts[indexPath.row]
             
             if let fromContact = App.shared.loggedUser {
                 
@@ -117,12 +117,12 @@ class ContactsTableViewController: UITableViewController {
                     let newRef = self.createChannel(from: fromContact, to: contact)
                     App.shared.loggedUser?.ref = newRef
                     contact.ref = newRef
-                    self.performSegue(withIdentifier: "ShowChannel", sender: contact)
+                    self.performSegue(withIdentifier: "ShowChat", sender: contact)
                 }
                 
             }
     }
-    
+    }
     func createChannel(from: Contact, to: Contact) -> DatabaseReference? {
         if let channelRef: DatabaseReference = DBRef.channel.ref {
             
@@ -148,6 +148,7 @@ class ContactsTableViewController: UITableViewController {
         
         if let contact = sender as? Contact {
             if let chatViewController = segue.destination as?  ChatViewController {
+                chatViewController.channelRef = contact.ref
                 chatViewController.sender = contact
                 chatViewController.senderDisplayName = contact.displayName
             }
@@ -160,7 +161,6 @@ class ContactsTableViewController: UITableViewController {
 //                chatViewController.channelRef = channelRef.child(channel.id)
 //            }
 //        }
+    
     }
-    
-    
 }

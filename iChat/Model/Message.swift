@@ -13,7 +13,7 @@ import Firebase
 struct Message {
     
     var id: String
-  //  var channelId: String?
+    var channelId: String?
     var from: String?
     var to: String?
     var text: String?
@@ -25,13 +25,14 @@ struct Message {
     init(id: String,
          from: String,
          to: String,
-         text: String) {
+         text: String,
+         channelId: String) {
         
         self.id = id
         self.from = from
         self.to = to
         self.text = text
-        //self.channelId = channelId
+        self.channelId = channelId
     }
     
     init(snapshot: DataSnapshot) {
@@ -40,7 +41,7 @@ struct Message {
             print("message data snapshot valu not found")
             return
         }
-       // self.channelId = value["channelId"] as? String
+        self.channelId = value["channelId"] as? String
         self.from = value["from"] as? String
         self.to = value["to"] as? String
         self.text = value["text"] as? String
@@ -48,11 +49,10 @@ struct Message {
     
     func toJSON() -> Any {
         return [
-            "id"        : self.id,
             "to"        : self.text,
             "from"      : self.from,
-            "text"      : self.text
-            //"channelId" : self.channelId
+            "text"      : self.text,
+            "channelId" : self.channelId
         ]
     }
     
