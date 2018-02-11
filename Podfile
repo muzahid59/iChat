@@ -9,7 +9,8 @@ target 'iChat' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'JSQMessagesViewController'
-
+  pod 'IQKeyboardManagerSwift'
+  
   target 'iChatTests' do
     inherit! :search_paths
     # Pods for testing

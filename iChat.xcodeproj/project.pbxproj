@@ -11,8 +11,11 @@
 		2612AC00CE8ADD83F50AF199 /* Pods_iChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C126D365AAA90E27B5AEAB0 /* Pods_iChatTests.framework */; };
 		4A245EF7202AF9FD00B0C855 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A245EF6202AF9FD00B0C855 /* Utility.swift */; };
 		4A245EF9202AFA8600B0C855 /* DBRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A245EF8202AFA8600B0C855 /* DBRef.swift */; };
+		4A245EFB202EE11900B0C855 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A245EFA202EE11900B0C855 /* SignUpViewController.swift */; };
+		4A245EFD202EE14100B0C855 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A245EFC202EE14100B0C855 /* LandingViewController.swift */; };
+		4A245F00202F249700B0C855 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A245EFF202F249700B0C855 /* Contact.swift */; };
+		4A245F02202FCF0000B0C855 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A245F01202FCF0000B0C855 /* Message.swift */; };
 		4AC69B24202860E000B2736A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B23202860E000B2736A /* AppDelegate.swift */; };
-		4AC69B26202860E000B2736A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B25202860E000B2736A /* ViewController.swift */; };
 		4AC69B29202860E000B2736A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC69B27202860E000B2736A /* Main.storyboard */; };
 		4AC69B2C202860E000B2736A /* iChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B2A202860E000B2736A /* iChat.xcdatamodeld */; };
 		4AC69B2E202860E000B2736A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AC69B2D202860E000B2736A /* Assets.xcassets */; };
@@ -22,9 +25,11 @@
 		4AC69B552028628C00B2736A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B542028628C00B2736A /* LoginViewController.swift */; };
 		4AC69B57202862A600B2736A /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B56202862A600B2736A /* ChannelListViewController.swift */; };
 		4AC69B5B202862E100B2736A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B5A202862E100B2736A /* ChatViewController.swift */; };
-		4AC69B5D2028632100B2736A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B5C2028632100B2736A /* Channel.swift */; };
 		4AC69B5F2028635500B2736A /* CreateChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B5E2028635500B2736A /* CreateChannelCell.swift */; };
 		4AC69B6420286E3000B2736A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */; };
+		4AF6DB8720300EE100FB38EE /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8620300EE100FB38EE /* Channel.swift */; };
+		4AF6DB8920301B3600FB38EE /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */; };
+		4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8A20304C3000FB38EE /* Session.swift */; };
 		F7AFB7D12BF89A053F6692FE /* Pods_iChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BC1B7D710B9DA63D6EB716 /* Pods_iChatUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,9 +54,12 @@
 		49EF31E5A6AABBCDD4ACB90B /* Pods_iChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A245EF6202AF9FD00B0C855 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		4A245EF8202AFA8600B0C855 /* DBRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBRef.swift; sourceTree = "<group>"; };
+		4A245EFA202EE11900B0C855 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4A245EFC202EE14100B0C855 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		4A245EFF202F249700B0C855 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		4A245F01202FCF0000B0C855 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4AC69B20202860E000B2736A /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC69B23202860E000B2736A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4AC69B25202860E000B2736A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4AC69B28202860E000B2736A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4AC69B2B202860E000B2736A /* iChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iChat.xcdatamodel; sourceTree = "<group>"; };
 		4AC69B2D202860E000B2736A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,10 +74,12 @@
 		4AC69B542028628C00B2736A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4AC69B56202862A600B2736A /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
 		4AC69B5A202862E100B2736A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		4AC69B5C2028632100B2736A /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		4AC69B5E2028635500B2736A /* CreateChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelCell.swift; sourceTree = "<group>"; };
 		4AC69B602028638D00B2736A /* iChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iChat.entitlements; sourceTree = "<group>"; };
 		4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4AF6DB8620300EE100FB38EE /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
+		4AF6DB8A20304C3000FB38EE /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6B6FCFC10646FDC9F5A3966B /* Pods-iChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		86BC684997D7BE9D3B7BBB0F /* Pods-iChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C126D365AAA90E27B5AEAB0 /* Pods_iChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +131,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4A245EFE202F245600B0C855 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A245EFF202F249700B0C855 /* Contact.swift */,
+				4A245F01202FCF0000B0C855 /* Message.swift */,
+				4AF6DB8620300EE100FB38EE /* Channel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4AC69B17202860E000B2736A = {
 			isa = PBXGroup;
 			children = (
@@ -149,13 +169,16 @@
 				4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */,
 				4AC69B602028638D00B2736A /* iChat.entitlements */,
 				4AC69B23202860E000B2736A /* AppDelegate.swift */,
-				4AC69B25202860E000B2736A /* ViewController.swift */,
 				4AC69B542028628C00B2736A /* LoginViewController.swift */,
+				4A245EFA202EE11900B0C855 /* SignUpViewController.swift */,
+				4A245EFC202EE14100B0C855 /* LandingViewController.swift */,
 				4AC69B56202862A600B2736A /* ChannelListViewController.swift */,
+				4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */,
 				4AC69B5A202862E100B2736A /* ChatViewController.swift */,
 				4A245EF6202AF9FD00B0C855 /* Utility.swift */,
+				4AF6DB8A20304C3000FB38EE /* Session.swift */,
 				4A245EF8202AFA8600B0C855 /* DBRef.swift */,
-				4AC69B5C2028632100B2736A /* Channel.swift */,
+				4A245EFE202F245600B0C855 /* Model */,
 				4AC69B5E2028635500B2736A /* CreateChannelCell.swift */,
 				4AC69B27202860E000B2736A /* Main.storyboard */,
 				4AC69B2D202860E000B2736A /* Assets.xcassets */,
@@ -366,6 +389,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-iChat/Pods-iChat-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -375,6 +399,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -503,16 +528,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AC69B5D2028632100B2736A /* Channel.swift in Sources */,
+				4A245F00202F249700B0C855 /* Contact.swift in Sources */,
+				4A245EFB202EE11900B0C855 /* SignUpViewController.swift in Sources */,
 				4AC69B552028628C00B2736A /* LoginViewController.swift in Sources */,
 				4A245EF7202AF9FD00B0C855 /* Utility.swift in Sources */,
-				4AC69B26202860E000B2736A /* ViewController.swift in Sources */,
 				4AC69B2C202860E000B2736A /* iChat.xcdatamodeld in Sources */,
+				4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */,
 				4A245EF9202AFA8600B0C855 /* DBRef.swift in Sources */,
+				4AF6DB8920301B3600FB38EE /* ContactsTableViewController.swift in Sources */,
+				4AF6DB8720300EE100FB38EE /* Channel.swift in Sources */,
 				4AC69B24202860E000B2736A /* AppDelegate.swift in Sources */,
 				4AC69B5B202862E100B2736A /* ChatViewController.swift in Sources */,
 				4AC69B57202862A600B2736A /* ChannelListViewController.swift in Sources */,
+				4A245EFD202EE14100B0C855 /* LandingViewController.swift in Sources */,
 				4AC69B5F2028635500B2736A /* CreateChannelCell.swift in Sources */,
+				4A245F02202FCF0000B0C855 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

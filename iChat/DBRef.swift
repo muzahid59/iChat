@@ -7,9 +7,15 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 public enum DBRef: String {
     case message = "message"
     case channel = "channel"
     case typingIndicator = "typingIndicator"
+    case contact = "contact"
+    
+    var ref: DatabaseReference? {
+        return Database.database().reference(withPath: self.rawValue)
+    }
 }

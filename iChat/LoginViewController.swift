@@ -9,70 +9,51 @@
 import UIKit
 import FirebaseAuth
 
+import UIKit
+import Firebase
+
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var bottomLayoutGuideConstraint: NSLayoutConstraint!
+    // MARK: Constants
+    let loginToList = "SignUpToContacts"
     
-    // MARK: View Lifecycle
+    // MARK: Outlets
+    @IBOutlet weak var textFieldLoginEmail: UITextField!
+    @IBOutlet weak var textFieldLoginPassword: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameField.text = "Foo"
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowNotification(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideNotification(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    @IBAction func loginDidTouch(_ sender: AnyObject) {
-        guard let name = nameField.text, !name.isEmpty else {
-            return
-        }
-        Auth.auth().signInAnonymously { (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+       Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                
+                let contact = Contact(user: user!)
+                App.shared.loggedUser = contact
+                
+                self.performSegue(withIdentifier: self.loginToList, sender: nil)
             }
-            
-            self.performSegue(withIdentifier: "LoginToChat", sender: nil)
         }
     }
     
-    // MARK: - Notifications
-    
-    @objc func keyboardWillShowNotification(_ notification: Notification) {
-        let keyboardEndFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let convertedKeyboardEndFrame = view.convert(keyboardEndFrame, from: view.window)
-        bottomLayoutGuideConstraint.constant = view.bounds.maxY - convertedKeyboardEndFrame.minY
-    }
-    
-    @objc func keyboardWillHideNotification(_ notification: Notification) {
-        bottomLayoutGuideConstraint.constant = 48
-    }
-    
-    // MARK: Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        let navVc = segue.destination as! UINavigationController // 1
-        let channelVc = navVc.viewControllers.first as! ChannelListViewController // 2
+    // MARK: Actions
+    @IBAction func loginDidTouch(_ sender: AnyObject) {
+        guard let email = textFieldLoginEmail.text, let password = textFieldLoginPassword.text else { return  }
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if error != nil {
+                print("login failed...")
+            } else {
+                print("signin success...")
+                 self.performSegue(withIdentifier: self.loginToList, sender: nil)
+            }
+        }
         
-        channelVc.senderDisplayName = nameField?.text // 3
+    }
+    
+    @IBAction func signUpDidTouch(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "LoginToSignUp", sender: self)
     }
     
 }
 
-extension LoginViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
+
+

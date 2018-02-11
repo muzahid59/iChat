@@ -18,9 +18,16 @@ final class ChatViewController: JSQMessagesViewController {
     
     // channel properties
     var channelRef: DatabaseReference?
+    
     var channel: Channel? {
         didSet {
             title = channel?.name
+        }
+    }
+    
+    var sender: Contact? {
+        didSet {
+            title = sender?.displayName
         }
     }
     

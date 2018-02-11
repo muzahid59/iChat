@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 enum Section: Int {
     case createNewChannelSection = 0
@@ -67,6 +68,16 @@ class ChannelListViewController: UITableViewController {
                                 ]
         newChannelRef.setValue(channelItem)
     }
+    
+    @IBAction func logoutDidPress(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.navigationController?.popViewController(animated: true)
+        } catch  {
+            print("signout error")
+        }
+    }
+    
     
     // MARK: UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
