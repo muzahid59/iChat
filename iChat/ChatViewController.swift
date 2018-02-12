@@ -68,6 +68,7 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.navigationItem.setHidesBackButton(false, animated: false)
         self.senderId = Auth.auth().currentUser?.uid
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
@@ -335,7 +336,7 @@ extension ChatViewController {
         
         let messageItem = [
             "to" : senderId,
-            "from" : App.shared.loggedUser?.uid,
+            "from" : Session.loggedUser?.uid,
             "text" : text,
             "channelId" : channelRef?.key
         ]

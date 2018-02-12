@@ -24,11 +24,11 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user != nil {
-                
-                let contact = Contact(user: user!)
-                App.shared.loggedUser = contact
+        
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let user = user {
+                let contact = Contact(user: user)
+                Session.loggedUser = contact
                 
                 self.performSegue(withIdentifier: self.loginToList, sender: nil)
             }
@@ -37,20 +37,20 @@ class LoginViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func loginDidTouch(_ sender: AnyObject) {
+        print(#function)
         guard let email = textFieldLoginEmail.text, let password = textFieldLoginPassword.text else { return  }
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print("login failed...")
             } else {
                 print("signin success...")
-                 self.performSegue(withIdentifier: self.loginToList, sender: nil)
             }
         }
         
     }
     
     @IBAction func signUpDidTouch(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "LoginToSignUp", sender: self)
+        self.performSegue(withIdentifier: "LoginToEmail", sender: self)
     }
     
 }

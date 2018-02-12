@@ -34,6 +34,8 @@ class ChannelListViewController: UITableViewController {
         observerChannels()
     }
     
+   
+    
     deinit {
         if let refHandle = channelRefHandle {
             channelRef.removeObserver(withHandle: refHandle)

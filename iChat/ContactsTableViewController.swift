@@ -25,9 +25,10 @@ class ContactsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Contact"
+        self.navigationItem.setHidesBackButton(true, animated: false)
         observeContacts()
     }
     
@@ -41,10 +42,13 @@ class ContactsTableViewController: UITableViewController {
     private func observeContacts() {
         contactRefHandle = contactRef.observe(.childAdded, with: { (snapshot) in
             let contact = Contact(snapshot: snapshot)
-            self.contacts.append(contact)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            if contact.uid != Session.loggedUser?.uid {
+                self.contacts.append(contact)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
+            
         })
     }
     
@@ -111,11 +115,11 @@ class ContactsTableViewController: UITableViewController {
             
             var contact = self.contacts[indexPath.row]
             
-            if let fromContact = App.shared.loggedUser {
+            if let fromContact = Session.loggedUser {
                 
                 if let channelRef: DatabaseReference = DBRef.channel.ref {
                     let newRef = self.createChannel(from: fromContact, to: contact)
-                    App.shared.loggedUser?.ref = newRef
+                    Session.loggedUser?.ref = newRef
                     contact.ref = newRef
                     self.performSegue(withIdentifier: "ShowChat", sender: contact)
                 }

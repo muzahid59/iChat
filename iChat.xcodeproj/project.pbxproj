@@ -30,6 +30,9 @@
 		4AF6DB8720300EE100FB38EE /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8620300EE100FB38EE /* Channel.swift */; };
 		4AF6DB8920301B3600FB38EE /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */; };
 		4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8A20304C3000FB38EE /* Session.swift */; };
+		4AF6DB8D2031714600FB38EE /* UserNamePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8C2031714600FB38EE /* UserNamePickerVC.swift */; };
+		4AF6DB8F2031715800FB38EE /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8E2031715800FB38EE /* PasswordViewController.swift */; };
+		4AF6DB912031717700FB38EE /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB902031717700FB38EE /* EmailViewController.swift */; };
 		F7AFB7D12BF89A053F6692FE /* Pods_iChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BC1B7D710B9DA63D6EB716 /* Pods_iChatUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +83,9 @@
 		4AF6DB8620300EE100FB38EE /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		4AF6DB8A20304C3000FB38EE /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		4AF6DB8C2031714600FB38EE /* UserNamePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNamePickerVC.swift; sourceTree = "<group>"; };
+		4AF6DB8E2031715800FB38EE /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		4AF6DB902031717700FB38EE /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		6B6FCFC10646FDC9F5A3966B /* Pods-iChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		86BC684997D7BE9D3B7BBB0F /* Pods-iChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C126D365AAA90E27B5AEAB0 /* Pods_iChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +180,9 @@
 				4A245EFC202EE14100B0C855 /* LandingViewController.swift */,
 				4AC69B56202862A600B2736A /* ChannelListViewController.swift */,
 				4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */,
+				4AF6DB8C2031714600FB38EE /* UserNamePickerVC.swift */,
+				4AF6DB8E2031715800FB38EE /* PasswordViewController.swift */,
+				4AF6DB902031717700FB38EE /* EmailViewController.swift */,
 				4AC69B5A202862E100B2736A /* ChatViewController.swift */,
 				4A245EF6202AF9FD00B0C855 /* Utility.swift */,
 				4AF6DB8A20304C3000FB38EE /* Session.swift */,
@@ -529,13 +538,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A245F00202F249700B0C855 /* Contact.swift in Sources */,
+				4AF6DB912031717700FB38EE /* EmailViewController.swift in Sources */,
 				4A245EFB202EE11900B0C855 /* SignUpViewController.swift in Sources */,
 				4AC69B552028628C00B2736A /* LoginViewController.swift in Sources */,
 				4A245EF7202AF9FD00B0C855 /* Utility.swift in Sources */,
 				4AC69B2C202860E000B2736A /* iChat.xcdatamodeld in Sources */,
+				4AF6DB8F2031715800FB38EE /* PasswordViewController.swift in Sources */,
 				4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */,
 				4A245EF9202AFA8600B0C855 /* DBRef.swift in Sources */,
 				4AF6DB8920301B3600FB38EE /* ContactsTableViewController.swift in Sources */,
+				4AF6DB8D2031714600FB38EE /* UserNamePickerVC.swift in Sources */,
 				4AF6DB8720300EE100FB38EE /* Channel.swift in Sources */,
 				4AC69B24202860E000B2736A /* AppDelegate.swift in Sources */,
 				4AC69B5B202862E100B2736A /* ChatViewController.swift in Sources */,

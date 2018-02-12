@@ -8,6 +8,7 @@
 
 import Foundation
 
+internal var Session = App.shared
 
 class App {
     

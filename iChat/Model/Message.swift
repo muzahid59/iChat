@@ -9,6 +9,23 @@
 import Foundation
 import Firebase
 
+/*
+ FireDB JSON:
+     message:{
+          "message id one":{
+             "channelId": "channel id between sender and receiver",
+             "from": "sender uid",
+             "to": "receiver uid",
+             "text": "message text"
+         },
+         "message id two":{
+         "channelId": "channel id between sender and receiver",
+         "from": "sender uid",
+         "to": "receiver uid",
+         "text": "message text"
+         },....
+     }
+ */
 
 struct Message {
     
