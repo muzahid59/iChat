@@ -10,13 +10,13 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-enum Section: Int {
-    case createNewChannelSection = 0
-    case currentChannelsSection
-}
+
 
 class ChannelListViewController: UITableViewController {
-    
+    enum Section: Int {
+        case createNewChannelSection = 0
+        case currentChannelsSection
+    }
     // MARK: Properties
     var senderDisplayName: String?
     var newChannelTextField: UITextField?

@@ -12,6 +12,9 @@ import FirebaseAuth
 
 class ContactsTableViewController: UITableViewController {
     
+    enum Section: Int {
+        case currentChannelsSection = 0
+    }
     // MARK: Properties
     var senderDisplayName: String?
     var newChannelTextField: UITextField?
@@ -28,6 +31,7 @@ class ContactsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = Session.loggedUser?.displayName
         self.navigationItem.setHidesBackButton(true, animated: false)
         observeContacts()
     }
@@ -41,7 +45,7 @@ class ContactsTableViewController: UITableViewController {
     
     private func observeContacts() {
         contactRefHandle = contactRef.observe(.childAdded, with: { (snapshot) in
-            let contact = Contact(snapshot: snapshot)
+            let contact = snapshot.asContact()
             if contact.uid != Session.loggedUser?.uid {
                 self.contacts.append(contact)
                 DispatchQueue.main.async {
@@ -77,14 +81,12 @@ class ContactsTableViewController: UITableViewController {
     
     // MARK: UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2 // 1
+        return 1 // 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { // 2
         if let currentSection: Section = Section(rawValue: section) {
             switch currentSection {
-            case .createNewChannelSection:
-                return 1
             case .currentChannelsSection:
                 return contacts.count
             }
@@ -95,14 +97,10 @@ class ContactsTableViewController: UITableViewController {
     
     // 3
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let reuseIdentifier = (indexPath as NSIndexPath).section == Section.createNewChannelSection.rawValue ? "NewChannel" : "ExistingChannel"
+        let reuseIdentifier = "ExistingChannel"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
-        if (indexPath as NSIndexPath).section == Section.createNewChannelSection.rawValue {
-            if let createNewChannelCell = cell as? CreateChannelCell {
-                newChannelTextField = createNewChannelCell.newChannelNameField
-            }
-        } else if (indexPath as NSIndexPath).section == Section.currentChannelsSection.rawValue {
+        if (indexPath as NSIndexPath).section == Section.currentChannelsSection.rawValue {
             cell.textLabel?.text = contacts[(indexPath as NSIndexPath).row].displayName
         }
         
@@ -125,8 +123,9 @@ class ContactsTableViewController: UITableViewController {
                 }
                 
             }
+        }
     }
-    }
+    
     func createChannel(from: Contact, to: Contact) -> DatabaseReference? {
         if let channelRef: DatabaseReference = DBRef.channel.ref {
             

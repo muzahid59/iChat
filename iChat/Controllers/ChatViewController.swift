@@ -28,6 +28,10 @@ final class ChatViewController: JSQMessagesViewController {
     var sender: Contact? {
         didSet {
             title = sender?.displayName
+            if let id = sender?.uid {
+                senderId = id
+            }
+            
         }
     }
     
@@ -78,7 +82,7 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       // observeTyping()
+        observeTyping()
     }
 
     
@@ -92,8 +96,8 @@ final class ChatViewController: JSQMessagesViewController {
         // new message addition handle
         newMessageHandle = messageQuery?.queryOrdered(byChild: "channelId").queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { (snapshot) in
             if let messageData = snapshot.value as? [String : Any] {
-                if let text = messageData["text"] as? String, text.count > 0,
-                    let senderId = self.sender?.uid,
+                if let text = messageData["text"] as? String, text.count > 0, let senderId = messageData["from"] as? String,
+                   // let senderId = self.sender?.uid,
                     let displyaName = self.sender?.displayName {
                     
                     self.addMessage(withId: senderId, name: displyaName, text: text)
@@ -127,7 +131,7 @@ final class ChatViewController: JSQMessagesViewController {
         // new message addition handle
         newMessageHandle = messageQuery?.observe(.childAdded, with: { (snapshot) in
             if let messageData = snapshot.value as? Dictionary<String, String> {
-                if let id = messageData["senderId"], let name = messageData["senderName"], let text = messageData["text"] as? String, text.count > 0 {
+                if let id = messageData["senderId"], let name = messageData["senderName"], let text = messageData["text"], text.count > 0 {
                     self.addMessage(withId: id, name: name, text: text)
                     self.finishReceivingMessage()
                 } else if let id = messageData["senderId"], let photoURL = messageData["photoURL"]  {
@@ -293,7 +297,7 @@ final class ChatViewController: JSQMessagesViewController {
 
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
-       // isTyping = !textView.text.isEmpty
+        isTyping = !textView.text.isEmpty
     }
 
     
@@ -341,9 +345,9 @@ extension ChatViewController {
             "channelId" : channelRef?.key
         ]
         itemRef?.setValue(messageItem)
-      //  JSQSystemSoundPlayer.jsq_playMessageSentSound()
-      //  finishSendingMessage()
-       // isTyping = false
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        finishSendingMessage()
+        isTyping = false
     }
 }
 

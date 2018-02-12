@@ -33,6 +33,7 @@
 		4AF6DB8D2031714600FB38EE /* UserNamePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8C2031714600FB38EE /* UserNamePickerVC.swift */; };
 		4AF6DB8F2031715800FB38EE /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8E2031715800FB38EE /* PasswordViewController.swift */; };
 		4AF6DB912031717700FB38EE /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB902031717700FB38EE /* EmailViewController.swift */; };
+		4AF6DB942031B7FD00FB38EE /* FBUserExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB932031B7FD00FB38EE /* FBUserExtras.swift */; };
 		F7AFB7D12BF89A053F6692FE /* Pods_iChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BC1B7D710B9DA63D6EB716 /* Pods_iChatUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		4AF6DB8C2031714600FB38EE /* UserNamePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNamePickerVC.swift; sourceTree = "<group>"; };
 		4AF6DB8E2031715800FB38EE /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		4AF6DB902031717700FB38EE /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		4AF6DB932031B7FD00FB38EE /* FBUserExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBUserExtras.swift; sourceTree = "<group>"; };
 		6B6FCFC10646FDC9F5A3966B /* Pods-iChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		86BC684997D7BE9D3B7BBB0F /* Pods-iChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C126D365AAA90E27B5AEAB0 /* Pods_iChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,18 +177,14 @@
 				4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */,
 				4AC69B602028638D00B2736A /* iChat.entitlements */,
 				4AC69B23202860E000B2736A /* AppDelegate.swift */,
-				4AC69B542028628C00B2736A /* LoginViewController.swift */,
+				4AF6DB922031AE8600FB38EE /* Controllers */,
 				4A245EFA202EE11900B0C855 /* SignUpViewController.swift */,
 				4A245EFC202EE14100B0C855 /* LandingViewController.swift */,
 				4AC69B56202862A600B2736A /* ChannelListViewController.swift */,
-				4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */,
-				4AF6DB8C2031714600FB38EE /* UserNamePickerVC.swift */,
-				4AF6DB8E2031715800FB38EE /* PasswordViewController.swift */,
-				4AF6DB902031717700FB38EE /* EmailViewController.swift */,
-				4AC69B5A202862E100B2736A /* ChatViewController.swift */,
 				4A245EF6202AF9FD00B0C855 /* Utility.swift */,
 				4AF6DB8A20304C3000FB38EE /* Session.swift */,
 				4A245EF8202AFA8600B0C855 /* DBRef.swift */,
+				4AF6DB932031B7FD00FB38EE /* FBUserExtras.swift */,
 				4A245EFE202F245600B0C855 /* Model */,
 				4AC69B5E2028635500B2736A /* CreateChannelCell.swift */,
 				4AC69B27202860E000B2736A /* Main.storyboard */,
@@ -214,6 +212,19 @@
 				4AC69B48202860E000B2736A /* Info.plist */,
 			);
 			path = iChatUITests;
+			sourceTree = "<group>";
+		};
+		4AF6DB922031AE8600FB38EE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AC69B542028628C00B2736A /* LoginViewController.swift */,
+				4AF6DB8820301B3600FB38EE /* ContactsTableViewController.swift */,
+				4AF6DB8C2031714600FB38EE /* UserNamePickerVC.swift */,
+				4AF6DB8E2031715800FB38EE /* PasswordViewController.swift */,
+				4AF6DB902031717700FB38EE /* EmailViewController.swift */,
+				4AC69B5A202862E100B2736A /* ChatViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		B178E58738A0077CD5C22E9B /* Frameworks */ = {
@@ -555,6 +566,7 @@
 				4A245EFD202EE14100B0C855 /* LandingViewController.swift in Sources */,
 				4AC69B5F2028635500B2736A /* CreateChannelCell.swift in Sources */,
 				4A245F02202FCF0000B0C855 /* Message.swift in Sources */,
+				4AF6DB942031B7FD00FB38EE /* FBUserExtras.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

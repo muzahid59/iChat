@@ -376,49 +376,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewChannel" id="Jnc-ha-KEC" customClass="CreateChannelCell" customModule="iChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jnc-ha-KEC" id="Abf-w3-PVh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create a New Channel" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PN6-gE-M8X">
-                                            <rect key="frame" x="24" y="7" width="281" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                        </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0C-Ul-elo">
-                                            <rect key="frame" x="313" y="7" width="46" height="30"/>
-                                            <state key="normal" title="Create"/>
-                                            <connections>
-                                                <action selector="createChannel:" destination="uwt-CO-P3S" eventType="touchUpInside" id="PbE-l5-BF6"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="PN6-gE-M8X" firstAttribute="centerY" secondItem="Abf-w3-PVh" secondAttribute="centerY" id="AHf-IO-rDs"/>
-                                        <constraint firstItem="g0C-Ul-elo" firstAttribute="leading" secondItem="PN6-gE-M8X" secondAttribute="trailing" constant="8" id="Eec-yV-tJe"/>
-                                        <constraint firstItem="g0C-Ul-elo" firstAttribute="centerY" secondItem="Abf-w3-PVh" secondAttribute="centerY" id="Ocu-9E-8if"/>
-                                        <constraint firstItem="g0C-Ul-elo" firstAttribute="leading" secondItem="PN6-gE-M8X" secondAttribute="trailing" constant="8" id="c13-JY-LZW"/>
-                                        <constraint firstItem="g0C-Ul-elo" firstAttribute="leading" secondItem="PN6-gE-M8X" secondAttribute="trailing" constant="8" id="xWy-sp-2Ir"/>
-                                        <constraint firstItem="PN6-gE-M8X" firstAttribute="leading" secondItem="Abf-w3-PVh" secondAttribute="leadingMargin" constant="8" id="yoM-wG-WP7"/>
-                                        <constraint firstItem="g0C-Ul-elo" firstAttribute="trailing" secondItem="Abf-w3-PVh" secondAttribute="trailingMargin" id="zXE-Lp-9mm"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="xWy-sp-2Ir"/>
-                                            <exclude reference="c13-JY-LZW"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="createChannelButton" destination="g0C-Ul-elo" id="mYL-13-CBW"/>
-                                    <outlet property="newChannelNameField" destination="PN6-gE-M8X" id="hPu-HE-ZKZ"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExistingChannel" textLabel="OTS-la-gs3" style="IBUITableViewCellStyleDefault" id="tfz-UD-RxH">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tfz-UD-RxH" id="kyL-wZ-DNK">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>

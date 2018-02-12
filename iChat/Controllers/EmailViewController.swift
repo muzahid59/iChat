@@ -1,5 +1,5 @@
 //
-//  UserNamePickerVC.swift
+//  EmailViewController.swift
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/12/18.
@@ -8,46 +8,30 @@
 
 import UIKit
 
-class UserNamePickerVC: UIViewController, UITextFieldDelegate {
+class EmailViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Constants
-    let segueIdentifier = "UserNameToPassword"
+    let segueIdentifier = "EmailToUserName"
     
     // MARK: Outlets
-    @IBOutlet weak var textFieldUserName: UITextField!
+    @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var continueButton: UIButton!
-    var userName: String?
-    var email: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textFieldUserName.becomeFirstResponder()
-        self.navigationItem.setHidesBackButton(true, animated: false)
-      //  self.navigationItem.leftBarButtonItem = nil
+        textFieldLoginEmail.becomeFirstResponder()
+        addTapGesture()
         // Do any additional setup after loading the view.
     }
-    
-    // MARK:- Action
-    
-    @IBAction func continueButtonPressed(_ sender: Any) {
-        if !(textFieldUserName.text?.isEmpty ?? false) {
-            self.performSegue(withIdentifier: segueIdentifier, sender: textFieldUserName)
-            
-        }
-        
+
+    func addTapGesture() {
+        let tap: UITapGestureRecognizer =     UITapGestureRecognizer(target: self, action:    #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
-    @IBAction func alreadyHaveAccountButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK:- UITextField Delegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if !(textField.text?.isEmpty ?? false) {
-            self.performSegue(withIdentifier: segueIdentifier, sender: textField)
-            
-        }
-        return true
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,6 +39,31 @@ class UserNamePickerVC: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK:- Action
+    
+    @IBAction func continueButtonPressed(_ sender: Any) {
+        if !(textFieldLoginEmail.text?.isEmpty ?? false) {
+            self.performSegue(withIdentifier: segueIdentifier, sender: textFieldLoginEmail)
+            
+        }
+    }
+    
+    @IBAction func alreadyHaveAccountButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    // MARK:- UITextField Delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if !(textField.text?.isEmpty ?? false) {
+            self.performSegue(withIdentifier: segueIdentifier, sender: textField)
+            return true
+        }
+        return false
+    }
+    
+
 
     
     // MARK: - Navigation
@@ -62,13 +71,11 @@ class UserNamePickerVC: UIViewController, UITextFieldDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let textField = sender as? UITextField {
-            if let destination = segue.destination as? PasswordViewController {
-                destination.userName = textField.text
-                destination.email = self.email
+            if let destination = segue.destination as? UserNamePickerVC {
+                destination.email = textField.text
             }
         }
     }
-    
  
 
 }

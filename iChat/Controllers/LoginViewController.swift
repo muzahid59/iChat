@@ -27,9 +27,9 @@ class LoginViewController: UIViewController {
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                let contact = Contact(user: user)
-                Session.loggedUser = contact
                 
+                Session.loggedUser = user.asContact()
+    
                 self.performSegue(withIdentifier: self.loginToList, sender: nil)
             }
         }

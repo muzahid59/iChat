@@ -25,8 +25,17 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textFieldPassword.becomeFirstResponder()
         self.navigationItem.setHidesBackButton(true, animated: false)
-        
-        // Do any additional setup after loading the view.
+       addTapGesture()
+    }
+    
+    func addTapGesture() {
+        let tap: UITapGestureRecognizer =     UITapGestureRecognizer(target: self, action:    #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     // MARK:- Action
@@ -39,7 +48,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                
+                print("signup successfull")
                 guard let user = user else { return }
                 
                 let changeReq = user.createProfileChangeRequest()
@@ -48,7 +57,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
                     if let error = error {
                         print(error.localizedDescription)
                     } else {
-                        print("signup successfull")
+                        print("display name update successfull")
                         self?.createContact(user: user)
                         self?.dismiss(animated: true, completion: nil)
                     }
@@ -59,7 +68,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     func createContact(user: User) {
-        let contact: Contact = Contact(user: user)
+        let contact: Contact = user.asContact()
         contact.saveIntoFireDB()
     }
     
