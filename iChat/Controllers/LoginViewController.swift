@@ -15,35 +15,45 @@ import Firebase
 class LoginViewController: UIViewController {
     
     // MARK: Constants
-    let loginToList = "SignUpToContacts"
+    let loginToList = "LoginToContacts"
     
     // MARK: Outlets
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if let user = user {
-                
-                Session.loggedUser = user.asContact()
-    
-                self.performSegue(withIdentifier: self.loginToList, sender: nil)
-            }
+        textFieldLoginEmail.text = "mmsaddam@gmail.com"
+        textFieldLoginPassword.text = "qqqqqqqq"
+
+        if let user = Auth.auth().currentUser {
+            Session.loggedUser = user.asContact()
+            Route.setAppTabBarAsRoot()
         }
+
     }
-    
+
+    deinit {
+        print("Login deinit")
+    }
+
     // MARK: Actions
     @IBAction func loginDidTouch(_ sender: AnyObject) {
         print(#function)
         guard let email = textFieldLoginEmail.text, let password = textFieldLoginPassword.text else { return  }
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+        spinner.startAnimating()
+        Auth.auth().signIn(withEmail: email, password: password) {[weak self] (user, error) in
+            self?.spinner.stopAnimating()
             if error != nil {
                 print("login failed...")
             } else {
                 print("signin success...")
+                let contact = user?.asContact()
+                Session.loggedUser = contact
+                Route.setAppTabBarAsRoot()
             }
         }
         

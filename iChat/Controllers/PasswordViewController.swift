@@ -18,6 +18,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var continueButton: UIButton!
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     var email: String?
     var userName: String?
     
@@ -43,7 +44,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
     @IBAction func continueButtonPressed(_ sender: Any) {
         
         guard let email = email, let password = textFieldPassword.text, let displayName = userName else { return }
-        
+        spinner.startAnimating()
         Auth.auth().createUser(withEmail: email, password: password, completion: {[weak self] (user, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -59,7 +60,15 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
                     } else {
                         print("display name update successfull")
                         self?.createContact(user: user)
-                        self?.dismiss(animated: true, completion: nil)
+                        let contact = user.asContact()
+                        contact.saveIntoFireDB()
+                        Session.loggedUser = contact
+                        DispatchQueue.main.async {
+                            self?.spinner.stopAnimating()
+                            Route.setAppTabBarAsRoot()
+                        }
+                        
+                        //self?.dismiss(animated: true, completion: nil)
                     }
                 })
             }

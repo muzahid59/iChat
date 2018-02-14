@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class ContactsTableViewController: UITableViewController {
+class ContactsVC: UITableViewController {
     
     enum Section: Int {
         case currentChannelsSection = 0
@@ -25,18 +25,25 @@ class ContactsTableViewController: UITableViewController {
     
     private var contactRefHandle: DatabaseHandle?
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        appDelegate.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        appDelegate.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Session.loggedUser?.displayName
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        navigationController?.navigationItem.title = Session.loggedUser?.displayName
+       // self.navigationItem.setHidesBackButton(true, animated: false)
         observeContacts()
     }
     
     deinit {
+        print(#function, "contact vc")
         if let refHandle = contactRefHandle {
             contactRef.removeObserver(withHandle: refHandle)
         }
@@ -56,23 +63,14 @@ class ContactsTableViewController: UITableViewController {
         })
     }
     
-    
+
     
     // MARK:- Action
-    
-    @IBAction func createChannel(_ sender: Any) {
-//        guard let channelName = newChannelTextField?.text, channelName.count > 0 else { return }
-//        let newChannelRef = self.channelRef.childByAutoId()
-//        let channelItem = [
-//            "name": channelName
-//        ]
-//        newChannelRef.setValue(channelItem)
-    }
     
     @IBAction func logoutDidPress(_ sender: Any) {
         do {
             try Auth.auth().signOut()
-            self.navigationController?.popViewController(animated: true)
+            Route.setLoginVCAsRoot()
         } catch  {
             print("signout error")
         }

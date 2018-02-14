@@ -34,6 +34,7 @@ struct Message {
     var from: String?
     var to: String?
     var text: String?
+    var photoURL: String?
     
     init(id: String) {
         self.id = id
@@ -43,13 +44,15 @@ struct Message {
          from: String,
          to: String,
          text: String,
-         channelId: String) {
+         channelId: String,
+         photoURL: String) {
         
         self.id = id
         self.from = from
         self.to = to
         self.text = text
         self.channelId = channelId
+        self.photoURL = photoURL
     }
     
     init(snapshot: DataSnapshot) {
@@ -62,6 +65,7 @@ struct Message {
         self.from = value["from"] as? String
         self.to = value["to"] as? String
         self.text = value["text"] as? String
+        self.photoURL = value["photoURL"] as? String
     }
     
     func toJSON() -> Any {
@@ -69,7 +73,8 @@ struct Message {
             "to"        : self.text,
             "from"      : self.from,
             "text"      : self.text,
-            "channelId" : self.channelId
+            "channelId" : self.channelId,
+            "photoURL"  : self.photoURL
         ]
     }
     

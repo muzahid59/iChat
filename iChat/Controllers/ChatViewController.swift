@@ -84,7 +84,6 @@ final class ChatViewController: JSQMessagesViewController {
         super.viewDidAppear(animated)
         observeTyping()
     }
-
     
     // MARK:- Observe Messages
     
@@ -96,15 +95,13 @@ final class ChatViewController: JSQMessagesViewController {
         // new message addition handle
         newMessageHandle = messageQuery?.queryOrdered(byChild: "channelId").queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { (snapshot) in
             if let messageData = snapshot.value as? [String : Any] {
-                if let text = messageData["text"] as? String, text.count > 0, let senderId = messageData["from"] as? String,
-                   // let senderId = self.sender?.uid,
-                    let displyaName = self.sender?.displayName {
+                if let text = messageData["text"] as? String, text.count > 0, let senderId = messageData["from"] as? String, let displyaName = self.sender?.displayName {
                     
                     self.addMessage(withId: senderId, name: displyaName, text: text)
                     self.finishReceivingMessage()
                     
-                }/* for photo message *//*
-                else if let id = messageData["senderId"], let photoURL = messageData["photoURL"]  {
+                }
+                else if let id = messageData["senderId"] as? String, let photoURL = messageData["photoURL"] as? String  {
                     if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self.senderId) {
                         self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                         if photoURL.hasPrefix("gs://") {
@@ -113,9 +110,23 @@ final class ChatViewController: JSQMessagesViewController {
                         
                     }
                     
-                }*/
+                }
             } else {
                 print("message data not found")
+            }
+        })
+        
+        // update message handle
+        updatedMessageRefHandle = messageRef?.observe(.childChanged, with: {[weak self] (snapshot) in
+            if let messageData = snapshot.value as? Dictionary<String, String> {
+                let key = snapshot.key
+                if let photoURL = messageData["photoURL"] {
+                    if let mediaItem = self?.photoMessageMap[key] {
+                        self?.fetchImageDataAtURL(photoURL: photoURL, forMediaItem: mediaItem, clearPhotoMessageMapOnSuccessForKey: key)
+                    }
+                }
+            } else {
+                print("update message data not found")
             }
         })
         
@@ -199,7 +210,8 @@ final class ChatViewController: JSQMessagesViewController {
         let itemRef = messageRef?.childByAutoId()
         let messageItem = [
             "photoURL": imageURLNotSetKey,
-            "senderId": senderId
+            "senderId": senderId,
+            "channelId" : channelRef?.key
         ]
         itemRef?.setValue(messageItem)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
@@ -304,6 +316,7 @@ final class ChatViewController: JSQMessagesViewController {
     // MARK:- Deinit
 
     deinit {
+        print(#function, "chat vc")
         if let refHandle = newMessageHandle {
             messageRef?.removeObserver(withHandle: refHandle)
         }

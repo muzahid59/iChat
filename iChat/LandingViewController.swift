@@ -11,17 +11,34 @@ import Firebase
 
 class LandingViewController: UIViewController {
 
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+    var listenerHanlde: AuthStateDidChangeListenerHandle?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user != nil {
-               
-                self.performSegue(withIdentifier: "LandinToChannelList", sender: nil)
+        spinner.startAnimating()
+        listenerHanlde = Auth.auth().addStateDidChangeListener {[weak self] (auth, user) in
+            DispatchQueue.main.async {
+                self?.spinner.stopAnimating()
+                if user != nil {
+                    Session.loggedUser = user?.asContact()
+                    Route.setAppTabBarAsRoot()
+                } else {
+                    Route.setLoginVCAsRoot()
+                }
             }
+            
         }
         // Do any additional setup after loading the view.
     }
-
+    
+    deinit {
+        if let listenerHanlde = self.listenerHanlde {
+            Auth.auth().removeStateDidChangeListener(listenerHanlde)
+        }
+        print("Landing deinit")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
