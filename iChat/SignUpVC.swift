@@ -1,5 +1,5 @@
 //
-//  SignUpViewController.swift
+//  SignUpVC.swift
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/10/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignUpViewController: UIViewController {
+class SignUpVC: UIViewController {
     
     // MARK: Constants
     let signUpToList = "SignUpToContacts"

@@ -18,10 +18,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Channel List View Controller-->
+        <!--Channel ListVC-->
         <scene sceneID="8ah-Er-Vt5">
             <objects>
-                <tableViewController id="Zgh-yl-4z0" customClass="ChannelListViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ChannelListVC" id="Zgh-yl-4z0" customClass="ChannelListVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5xQ-y9-uye">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,18 +98,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="mC9-1X-hI2" kind="show" identifier="ShowChannel" id="2fy-ea-do1"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ocg-Fs-xtv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-620" y="-1248"/>
+            <point key="canvasLocation" x="3103" y="761"/>
         </scene>
-        <!--Chat View Controller-->
+        <!--ChatVC-->
         <scene sceneID="Pya-sf-M0p">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="mC9-1X-hI2" customClass="ChatViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatVC" id="mC9-1X-hI2" customClass="ChatVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nEX-de-Jvy"/>
                         <viewControllerLayoutGuide type="bottom" id="9Ec-Hd-oRo"/>
@@ -126,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="-119" y="247"/>
         </scene>
-        <!--Login View Controller-->
+        <!--LoginVC-->
         <scene sceneID="1r6-pa-vnM">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="WDU-u0-ahN" customClass="LoginViewController" customModule="iChat" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="WDU-u0-ahN" customClass="LoginVC" customModule="iChat" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oGm-sb-gDx"/>
                         <viewControllerLayoutGuide type="bottom" id="rdo-v8-Fh1"/>
@@ -139,9 +136,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iChat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJ4-Jg-yxF">
-                                <rect key="frame" x="104.5" y="52" width="166" height="59"/>
+                                <rect key="frame" x="112" y="52" width="151" height="59"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="166" id="2gF-Yl-zkc"/>
                                     <constraint firstAttribute="height" constant="59" id="v6D-CD-M9E"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="64"/>
@@ -243,10 +239,10 @@
             </objects>
             <point key="canvasLocation" x="-1938" y="247"/>
         </scene>
-        <!--Email View Controller-->
+        <!--EmailVC-->
         <scene sceneID="WYD-OR-Wsh">
             <objects>
-                <viewController id="JgD-8M-3JR" customClass="EmailViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailVC" id="JgD-8M-3JR" customClass="EmailVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bpc-2M-NZA"/>
                         <viewControllerLayoutGuide type="bottom" id="2dz-kk-kGx"/>
@@ -294,7 +290,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzC-H0-JnC">
-                                <rect key="frame" x="99" y="557" width="176" height="30"/>
+                                <rect key="frame" x="99.5" y="557" width="176" height="30"/>
                                 <state key="normal" title="Already have an account?">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -356,10 +352,51 @@
                     <view key="view" contentMode="scaleToFill" id="hLG-Fa-M1N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Is7-yX-8iS">
+                                <rect key="frame" x="137" y="99" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="hBP-U7-ade"/>
+                                    <constraint firstAttribute="width" constant="100" id="rl9-Ug-eUW"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avF-xz-YmO">
+                                <rect key="frame" x="157" y="249" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.87144315240000003" green="0.39403993549999999" blue="0.35511917980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6ER-eg-QKA"/>
+                                    <constraint firstAttribute="width" constant="60" id="H52-Bd-9yM"/>
+                                </constraints>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editDidPressed:" destination="OGs-o9-auL" eventType="touchUpInside" id="KUG-nD-t8q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytU-82-JAW">
+                                <rect key="frame" x="157" y="348" width="60" height="60"/>
+                                <state key="normal" title="Update"/>
+                                <connections>
+                                    <action selector="updateDidPressed:" destination="OGs-o9-auL" eventType="touchUpInside" id="GeZ-Gh-dY8"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="avF-xz-YmO" firstAttribute="centerX" secondItem="hLG-Fa-M1N" secondAttribute="centerX" id="ArW-Cr-l9W"/>
+                            <constraint firstItem="ytU-82-JAW" firstAttribute="width" secondItem="avF-xz-YmO" secondAttribute="width" id="Jdf-Gm-wah"/>
+                            <constraint firstItem="avF-xz-YmO" firstAttribute="top" secondItem="Is7-yX-8iS" secondAttribute="bottom" constant="50" id="QCZ-AP-WoA"/>
+                            <constraint firstItem="ytU-82-JAW" firstAttribute="top" secondItem="avF-xz-YmO" secondAttribute="bottom" constant="39" id="f1K-je-WKt"/>
+                            <constraint firstItem="Is7-yX-8iS" firstAttribute="centerX" secondItem="hLG-Fa-M1N" secondAttribute="centerX" id="fAs-Ma-DAf"/>
+                            <constraint firstItem="ytU-82-JAW" firstAttribute="centerX" secondItem="avF-xz-YmO" secondAttribute="centerX" id="gBb-Ne-cQX"/>
+                            <constraint firstItem="Is7-yX-8iS" firstAttribute="top" secondItem="l5i-PI-2wU" secondAttribute="top" constant="35" id="rxQ-OR-8Yj"/>
+                            <constraint firstItem="ytU-82-JAW" firstAttribute="height" secondItem="avF-xz-YmO" secondAttribute="height" id="xIR-Ie-UgK"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="l5i-PI-2wU"/>
                     </view>
                     <navigationItem key="navigationItem" id="hYH-aS-xrB"/>
+                    <connections>
+                        <outlet property="profilePic" destination="Is7-yX-8iS" id="mfw-Df-slg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frm-Bz-cbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -460,10 +497,10 @@
             </objects>
             <point key="canvasLocation" x="-2274" y="1503"/>
         </scene>
-        <!--User Name PickerVC-->
+        <!--User NameVC-->
         <scene sceneID="igV-vc-baB">
             <objects>
-                <viewController id="4Gi-qc-h7b" customClass="UserNamePickerVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserNameVC" id="4Gi-qc-h7b" customClass="UserNameVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cwx-9G-w4e"/>
                         <viewControllerLayoutGuide type="bottom" id="Z69-Lg-npL"/>
@@ -473,7 +510,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your user name?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tz1-5M-8Kk">
-                                <rect key="frame" x="101.5" y="60" width="173" height="20.5"/>
+                                <rect key="frame" x="101" y="60" width="173" height="20.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -511,7 +548,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wk5-5a-ZML">
-                                <rect key="frame" x="99" y="557" width="176" height="30"/>
+                                <rect key="frame" x="99.5" y="557" width="176" height="30"/>
                                 <state key="normal" title="Already have an account?">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -566,10 +603,10 @@
             </objects>
             <point key="canvasLocation" x="-937" y="1503"/>
         </scene>
-        <!--Password View Controller-->
+        <!--PasswordVC-->
         <scene sceneID="CIg-J8-l8X">
             <objects>
-                <viewController id="pqN-Pi-q9u" customClass="PasswordViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PasswordVC" id="pqN-Pi-q9u" customClass="PasswordVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WqK-vc-3Nx"/>
                         <viewControllerLayoutGuide type="bottom" id="S4B-U8-ZO8"/>
@@ -617,7 +654,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Tl-wR-4AL">
-                                <rect key="frame" x="99" y="557" width="176" height="30"/>
+                                <rect key="frame" x="99.5" y="557" width="176" height="30"/>
                                 <state key="normal" title="Already have an account?">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -695,16 +732,16 @@
             </objects>
             <point key="canvasLocation" x="-2182" y="2311"/>
         </scene>
-        <!--Landing View Controller-->
+        <!--LandingVC-->
         <scene sceneID="ho8-a2-ICG">
             <objects>
-                <viewController id="hfY-GB-qqf" customClass="LandingViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LandingVC" id="hfY-GB-qqf" customClass="LandingVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cQk-49-x7A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NHK-8v-QGF">
-                                <rect key="frame" x="178" y="324" width="20" height="20"/>
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -726,7 +763,4 @@
             <point key="canvasLocation" x="-3497" y="247"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="gsS-xF-FrM"/>
-    </inferredMetricsTieBreakers>
 </document>

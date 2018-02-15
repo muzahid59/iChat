@@ -1,5 +1,5 @@
 //
-//  PasswordViewController.swift
+//  PasswordVC.swift
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/12/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class PasswordViewController: UIViewController, UITextFieldDelegate {
+class PasswordVC: UIViewController, UITextFieldDelegate {
 
     // MARK: Constants
     let segueIdentifier = "userNameToPassword"

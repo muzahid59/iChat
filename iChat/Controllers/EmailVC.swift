@@ -1,5 +1,5 @@
 //
-//  EmailViewController.swift
+//  EmailVC.swift
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/12/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmailViewController: UIViewController, UITextFieldDelegate {
+class EmailVC: UIViewController, UITextFieldDelegate {
 
     // MARK: Constants
     let segueIdentifier = "EmailToUserName"
@@ -71,7 +71,7 @@ class EmailViewController: UIViewController, UITextFieldDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let textField = sender as? UITextField {
-            if let destination = segue.destination as? UserNamePickerVC {
+            if let destination = segue.destination as? UserNameVC {
                 destination.email = textField.text
             }
         }

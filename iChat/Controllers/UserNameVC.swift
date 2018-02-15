@@ -1,5 +1,5 @@
 //
-//  UserNamePickerVC.swift
+//  UserNameVC.swift
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/12/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserNamePickerVC: UIViewController, UITextFieldDelegate {
+class UserNameVC: UIViewController, UITextFieldDelegate {
 
     // MARK: Constants
     let segueIdentifier = "UserNameToPassword"
@@ -70,7 +70,7 @@ class UserNamePickerVC: UIViewController, UITextFieldDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let textField = sender as? UITextField {
-            if let destination = segue.destination as? PasswordViewController {
+            if let destination = segue.destination as? PasswordVC {
                 destination.userName = textField.text
                 destination.email = self.email
             }

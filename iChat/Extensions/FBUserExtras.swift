@@ -11,7 +11,6 @@ import Firebase
 import FirebaseAuth
 
 extension User {
-    
     func asContact() -> Contact {
         return Contact(user: self)
     }

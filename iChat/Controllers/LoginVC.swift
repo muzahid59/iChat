@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  LoginVC
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/5/18.
@@ -12,7 +12,7 @@ import FirebaseAuth
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class LoginVC: UIViewController {
     
     // MARK: Constants
     let loginToList = "LoginToContacts"

@@ -32,7 +32,7 @@ class ContactsVC: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        appDelegate.tabBarController?.tabBar.isHidden = true
+       // appDelegate.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidLoad() {
@@ -109,38 +109,24 @@ class ContactsVC: UITableViewController {
         
         if indexPath.section == Section.currentChannelsSection.rawValue {
             
-            var contact = self.contacts[indexPath.row]
+            var toContact = self.contacts[indexPath.row]
             
             if let fromContact = Session.loggedUser {
                 
                 if let channelRef: DatabaseReference = DBRef.channel.ref {
-                    let newRef = self.createChannel(from: fromContact, to: contact)
+                    
+                    let newRef = Channel.createChannel(from: fromContact, to: toContact)
+                    
+                    /// Assing ref to respective channel members
                     Session.loggedUser?.ref = newRef
-                    contact.ref = newRef
-                    self.performSegue(withIdentifier: "ShowChat", sender: contact)
+                    toContact.ref = newRef
+                    
+                    self.performSegue(withIdentifier: "ShowChat", sender: toContact)
                 }
                 
             }
         }
     }
-    
-    func createChannel(from: Contact, to: Contact) -> DatabaseReference? {
-        if let channelRef: DatabaseReference = DBRef.channel.ref {
-            
-            let key = String((from.uid + to.uid).sorted())
-            
-            let newRef = channelRef.child(key)
-            
-            newRef.setValue([
-                "name" : "anonymous",
-                "members" : [from.uid, to.uid]
-                ])
-            return newRef
-        }
-        
-        return nil
-    }
-    
     
     // MARK:- Navigation
     
@@ -148,20 +134,12 @@ class ContactsVC: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         if let contact = sender as? Contact {
-            if let chatViewController = segue.destination as?  ChatViewController {
+            if let chatViewController = segue.destination as?  ChatVC {
                 chatViewController.channelRef = contact.ref
                 chatViewController.sender = contact
                 chatViewController.senderDisplayName = contact.displayName
             }
         }
         
-//        if let channel = sender as? Channel {
-//            if let chatViewController = segue.destination as?  ChatViewController {
-//                chatViewController.senderDisplayName = senderDisplayName
-//                chatViewController.channel = channel
-//                chatViewController.channelRef = channelRef.child(channel.id)
-//            }
-//        }
-    
     }
 }

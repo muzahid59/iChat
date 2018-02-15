@@ -1,5 +1,5 @@
 //
-//  LandingViewController.swift
+//  LandingVC.swift
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/10/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LandingViewController: UIViewController {
+class LandingVC: UIViewController {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     

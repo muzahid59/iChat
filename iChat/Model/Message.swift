@@ -31,8 +31,7 @@ struct Message {
     
     var id: String
     var channelId: String?
-    var from: String?
-    var to: String?
+    var senderId: String?
     var text: String?
     var photoURL: String?
     
@@ -41,15 +40,13 @@ struct Message {
     }
     
     init(id: String,
-         from: String,
-         to: String,
+         senderId: String,
          text: String,
          channelId: String,
          photoURL: String) {
         
         self.id = id
-        self.from = from
-        self.to = to
+        self.senderId = senderId
         self.text = text
         self.channelId = channelId
         self.photoURL = photoURL
@@ -61,20 +58,18 @@ struct Message {
             print("message data snapshot valu not found")
             return
         }
-        self.channelId = value["channelId"] as? String
-        self.from = value["from"] as? String
-        self.to = value["to"] as? String
-        self.text = value["text"] as? String
-        self.photoURL = value["photoURL"] as? String
+        self.channelId = value[Fields.channelId] as? String
+        self.senderId = value[Fields.senderId] as? String
+        self.text = value[Fields.text] as? String
+        self.photoURL = value[Fields.photoUrl] as? String
     }
     
     func toJSON() -> Any {
         return [
-            "to"        : self.text,
-            "from"      : self.from,
-            "text"      : self.text,
-            "channelId" : self.channelId,
-            "photoURL"  : self.photoURL
+            Fields.senderId      : self.senderId,
+            Fields.text      : self.text,
+            Fields.channelId : self.channelId,
+            Fields.photoUrl  : self.photoURL
         ]
     }
     
@@ -87,3 +82,18 @@ struct Message {
     }
     
 }
+
+
+// MARK:- All Properties
+
+extension Message {
+    struct Fields {
+        static let id           = "id"
+        static let channelId    = "channelId"
+        static let senderId     = "senderId"
+        static let text         = "text"
+        static let photoUrl     = "photoURL"
+        
+    }
+}
+

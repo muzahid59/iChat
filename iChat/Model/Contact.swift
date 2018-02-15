@@ -15,12 +15,14 @@ struct Contact {
     var email: String?
     var displayName: String?
     var ref: DatabaseReference?
+    var photoUrl: String?
     
     init(user: User) {
         self.uid = user.uid
         self.email = user.email
         self.displayName = user.displayName
         self.ref = DBRef.contact.ref
+        self.photoUrl = user.photoURL?.absoluteString
     }
     init(uid: String) {
         self.uid = uid
@@ -29,16 +31,17 @@ struct Contact {
     init(snapshot: DataSnapshot) {
         self.uid = snapshot.key
         if let value = snapshot.value as? [String: Any] {
-            self.email = value["email"] as? String
-            self.displayName = value["displayName"] as? String
+            self.email = value[fields.email] as? String
+            self.displayName = value[fields.displayName] as? String
+            self.photoUrl = value[fields.photoUrl] as? String
         }
     }
     
     func toJSON() -> Any {
         return [
-            "uid" : self.uid,
-            "email" : self.email,
-            "displayName" : self.displayName
+            fields.email        : self.email,
+            fields.displayName  : self.displayName,
+            fields.photoUrl     : self.photoUrl
         ]
     }
     func saveIntoFireDB() {
@@ -46,9 +49,17 @@ struct Contact {
            return
         }
         let newRef = ref.child(self.uid)
-        newRef.setValue([
-            "email"         : self.email,
-            "displayName"   : self.displayName
-            ])
+        newRef.setValue(toJSON())
+    }
+}
+
+// MARK:- All Properties
+
+extension Contact {
+    struct fields {
+        static let uid              = "uid"
+        static let email            = "email"
+        static let displayName      = "displayName"
+        static let photoUrl         = "photoUrl"
     }
 }

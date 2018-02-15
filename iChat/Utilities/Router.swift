@@ -13,43 +13,52 @@ struct Route {
     
     static func setAppTabBarAsRoot() {
         print(#function)
-        let tabbarController = UITabBarController()
-        tabbarController.tabBar.barTintColor = appBGColor
-        tabbarController.tabBar.tintColor = .white
-    
+        
+        let tabBarController: UITabBarController = {
+            let tabController = UITabBarController()
+            tabController.tabBar.barTintColor = appBGColor
+            tabController.tabBar.tintColor = .white
+            return tabController
+        }()
+        
         let storyboard = UIStoryboard.storyBoard(storyBoard: .Main)
         
-        //  UITableViewController
-        let contactsVC: ContactsVC =  storyboard.instantiateViewController(withIdentifier: ContactsVC.storyboardIdentifier) as! ContactsVC
+        let contactsVC: ContactsVC = {
+            let contactsVC: ContactsVC =  storyboard.instantiateViewController(withIdentifier: ContactsVC.storyboardIdentifier) as! ContactsVC
+            
+            contactsVC.tabBarItem.selectedImage = UIImage(named: "chat_selected")
+            contactsVC.tabBarItem.image = UIImage(named: "chat_deselected")
+            contactsVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+            return contactsVC
+        }()
         
-        contactsVC.tabBarItem.selectedImage = UIImage(named: "chat_selected")
-        contactsVC.tabBarItem.image = UIImage(named: "chat_deselected")
-        contactsVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        let profileVC: ProfileVC = {
+            let profileVC = storyboard.instantiateViewController(withIdentifier: ProfileVC.storyboardIdentifier) as! ProfileVC
+            
+            profileVC.tabBarItem.selectedImage = UIImage(named: "profile_selected")
+            profileVC.tabBarItem.image = UIImage(named: "profile_deselected")
+            profileVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+            return profileVC
+        }()
         
-        let profileVC = storyboard.instantiateViewController(withIdentifier: ProfileVC.storyboardIdentifier) as! ProfileVC
-        
-        profileVC.tabBarItem.selectedImage = UIImage(named: "profile_selected")
-        profileVC.tabBarItem.image = UIImage(named: "profile_deselected")
-        profileVC.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-       
         let viewControllers = [
             contactsVC,
             profileVC
         ]
         
-        tabbarController.viewControllers = viewControllers.map {
+        tabBarController.viewControllers = viewControllers.map {
             UINavigationController(rootViewController: $0)
         }
         
-        switchRootViewController(viewController: tabbarController, animated: true, completion: {
-            appDelegate.tabBarController = tabbarController
+        switchRootViewController(viewController: tabBarController, animated: true, completion: {
+            appDelegate.tabBarController = tabBarController
         })
         
     }
     
     static func setLoginVCAsRoot() {
         print(#function)
-        let loginVC = UIStoryboard.storyBoard(storyBoard: .Main).instantiateViewController(withIdentifier: LoginViewController.storyboardIdentifier) as! LoginViewController
+        let loginVC = UIStoryboard.storyBoard(storyBoard: .Main).instantiateViewController(withIdentifier: LoginVC.storyboardIdentifier) as! LoginVC
         switchRootViewController(viewController: loginVC, animated: true, completion: nil)
     }
     

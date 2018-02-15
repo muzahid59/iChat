@@ -1,5 +1,5 @@
 //
-//  ChatViewController.swift
+//  ChatVC.swift
 //  iChat
 //
 //  Created by Muzahidul Islam on 2/5/18.
@@ -14,16 +14,10 @@ import JSQMessagesViewController
 import Photos
 import ImageIO
 
-final class ChatViewController: JSQMessagesViewController {
+final class ChatVC: JSQMessagesViewController {
     
     // channel properties
     var channelRef: DatabaseReference?
-    
-    var channel: Channel? {
-        didSet {
-            title = channel?.name
-        }
-    }
     
     var sender: Contact? {
         didSet {
@@ -72,12 +66,21 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
          self.navigationItem.setHidesBackButton(false, animated: false)
-        self.senderId = Auth.auth().currentUser?.uid
-        collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
-        collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        
+        self.senderId = Session.loggedUser?.uid
+        self.senderDisplayName = Session.loggedUser?.displayName
+        collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width: 40.0, height: 40.0)
+        collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: 40.0, height: 40.0)
+        
        // observeMessages()
-        observerMessageDemo()
+        observerMessage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         appDelegate.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,21 +90,21 @@ final class ChatViewController: JSQMessagesViewController {
     
     // MARK:- Observe Messages
     
-    private func observerMessageDemo() {
+    private func observerMessage() {
         print(#function)
         // messageRef = channelRef!.child("messages")
         let messageQuery = messageRef?.queryLimited(toLast: 20)
         
         // new message addition handle
-        newMessageHandle = messageQuery?.queryOrdered(byChild: "channelId").queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { (snapshot) in
+        newMessageHandle = messageQuery?.queryOrdered(byChild: Message.Fields.channelId).queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { (snapshot) in
             if let messageData = snapshot.value as? [String : Any] {
-                if let text = messageData["text"] as? String, text.count > 0, let senderId = messageData["from"] as? String, let displyaName = self.sender?.displayName {
+                if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self.sender?.displayName {
                     
                     self.addMessage(withId: senderId, name: displyaName, text: text)
                     self.finishReceivingMessage()
                     
                 }
-                else if let id = messageData["senderId"] as? String, let photoURL = messageData["photoURL"] as? String  {
+                else if let id = messageData[Message.Fields.senderId] as? String, let photoURL = messageData[Message.Fields.photoUrl] as? String  {
                     if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self.senderId) {
                         self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                         if photoURL.hasPrefix("gs://") {
@@ -120,7 +123,7 @@ final class ChatViewController: JSQMessagesViewController {
         updatedMessageRefHandle = messageRef?.observe(.childChanged, with: {[weak self] (snapshot) in
             if let messageData = snapshot.value as? Dictionary<String, String> {
                 let key = snapshot.key
-                if let photoURL = messageData["photoURL"] {
+                if let photoURL = messageData[Message.Fields.photoUrl] {
                     if let mediaItem = self?.photoMessageMap[key] {
                         self?.fetchImageDataAtURL(photoURL: photoURL, forMediaItem: mediaItem, clearPhotoMessageMapOnSuccessForKey: key)
                     }
@@ -131,48 +134,6 @@ final class ChatViewController: JSQMessagesViewController {
         })
         
         
-    }
-    
-    
-    private func observeMessages() {
-        print(#function)
-       // messageRef = channelRef!.child("messages")
-        let messageQuery = messageRef?.queryLimited(toLast: 20)
-        
-        // new message addition handle
-        newMessageHandle = messageQuery?.observe(.childAdded, with: { (snapshot) in
-            if let messageData = snapshot.value as? Dictionary<String, String> {
-                if let id = messageData["senderId"], let name = messageData["senderName"], let text = messageData["text"], text.count > 0 {
-                    self.addMessage(withId: id, name: name, text: text)
-                    self.finishReceivingMessage()
-                } else if let id = messageData["senderId"], let photoURL = messageData["photoURL"]  {
-                    if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self.senderId) {
-                        self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
-                        if photoURL.hasPrefix("gs://") {
-                            self.fetchImageDataAtURL(photoURL: photoURL, forMediaItem: mediaItem, clearPhotoMessageMapOnSuccessForKey: nil)
-                        }
-                        
-                    }
-                    
-                }
-            } else {
-                print("message data not found")
-            }
-        })
-        
-        // update message handle
-        updatedMessageRefHandle = messageRef?.observe(.childChanged, with: {[weak self] (snapshot) in
-            if let messageData = snapshot.value as? Dictionary<String, String> {
-                let key = snapshot.key
-                if let photoURL = messageData["photoURL"] {
-                    if let mediaItem = self?.photoMessageMap[key] {
-                        self?.fetchImageDataAtURL(photoURL: photoURL, forMediaItem: mediaItem, clearPhotoMessageMapOnSuccessForKey: key)
-                    }
-                }
-            } else {
-                print("update message data not found")
-            }
-        })
     }
     
     
@@ -209,9 +170,9 @@ final class ChatViewController: JSQMessagesViewController {
     private func sendPhotoMessage() -> String? {
         let itemRef = messageRef?.childByAutoId()
         let messageItem = [
-            "photoURL": imageURLNotSetKey,
-            "senderId": senderId,
-            "channelId" : channelRef?.key
+            Message.Fields.photoUrl     : imageURLNotSetKey,
+            Message.Fields.senderId     : senderId,
+            Message.Fields.channelId    : channelRef?.key
         ]
         itemRef?.setValue(messageItem)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
@@ -222,7 +183,7 @@ final class ChatViewController: JSQMessagesViewController {
     
     private func setImageURL(urlString: String, forPhotoMessageWithKey key: String) {
         let itemRef = messageRef?.child(key)
-        itemRef?.updateChildValues(["photoURL": urlString])
+        itemRef?.updateChildValues([Message.Fields.photoUrl: urlString])
     }
 
     private func fetchImageDataAtURL(photoURL: String, forMediaItem mediaItem: JSQPhotoMediaItem, clearPhotoMessageMapOnSuccessForKey key: String?) {
@@ -277,7 +238,11 @@ final class ChatViewController: JSQMessagesViewController {
     // MARK:- JSQAvatar Disable
 
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        
+        let message = messages[indexPath.item]
+        let avatar = message.senderId == senderId ? "avatar_outgoing" : "avatar_incoming"
+       
+        return JSQMessagesAvatarImage(placeholder: UIImage(named: avatar))
     }
 
     
@@ -346,16 +311,15 @@ final class ChatViewController: JSQMessagesViewController {
 
 // MARK:- Send Button Did Press
 
-extension ChatViewController {
+extension ChatVC {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         let itemRef = messageRef?.childByAutoId()
         
         let messageItem = [
-            "to" : senderId,
-            "from" : Session.loggedUser?.uid,
-            "text" : text,
-            "channelId" : channelRef?.key
+            Message.Fields.senderId : senderId,
+            Message.Fields.text : text,
+            Message.Fields.channelId : channelRef?.key
         ]
         itemRef?.setValue(messageItem)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
@@ -367,7 +331,7 @@ extension ChatViewController {
 
 // MARK:- didPressAccessoryButton
 
-extension ChatViewController {
+extension ChatVC {
     
     override func didPressAccessoryButton(_ sender: UIButton!) {
         let picker = UIImagePickerController()
@@ -387,7 +351,7 @@ extension ChatViewController {
 
 // MARK:- UIImagePickerControllerDelegate
 
-extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ChatVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         picker.dismiss(animated: true, completion: nil)
@@ -439,7 +403,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
 // MARK:- JSQDataSource
 
-extension ChatViewController {
+extension ChatVC {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
             return messages[indexPath.item]
