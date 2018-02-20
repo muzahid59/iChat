@@ -26,7 +26,7 @@ class PasswordVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textFieldPassword.becomeFirstResponder()
         self.navigationItem.setHidesBackButton(true, animated: false)
-       addTapGesture()
+        addTapGesture()
     }
     
     func addTapGesture() {

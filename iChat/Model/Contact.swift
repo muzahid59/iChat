@@ -14,14 +14,12 @@ struct Contact {
     var uid: String
     var email: String?
     var displayName: String?
-    var ref: DatabaseReference?
     var photoUrl: String?
     
     init(user: User) {
         self.uid = user.uid
         self.email = user.email
         self.displayName = user.displayName
-        self.ref = DBRef.contact.ref
         self.photoUrl = user.photoURL?.absoluteString
     }
     init(uid: String) {
@@ -45,7 +43,7 @@ struct Contact {
         ]
     }
     func saveIntoFireDB() {
-        guard let ref = self.ref else {
+        guard let ref = DBRef.contact.ref else {
            return
         }
         let newRef = ref.child(self.uid)

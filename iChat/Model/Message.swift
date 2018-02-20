@@ -66,10 +66,10 @@ struct Message {
     
     func toJSON() -> Any {
         return [
-            Fields.senderId      : self.senderId,
-            Fields.text      : self.text,
-            Fields.channelId : self.channelId,
-            Fields.photoUrl  : self.photoURL
+            Fields.senderId     : self.senderId,
+            Fields.text         : self.text,
+            Fields.channelId    : self.channelId,
+            Fields.photoUrl     : self.photoURL
         ]
     }
     

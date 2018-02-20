@@ -23,8 +23,8 @@ struct Route {
         
         let storyboard = UIStoryboard.storyBoard(storyBoard: .Main)
         
-        let contactsVC: ContactsVC = {
-            let contactsVC: ContactsVC =  storyboard.instantiateViewController(withIdentifier: ContactsVC.storyboardIdentifier) as! ContactsVC
+        let contactsVC: ChatHomeVC = {
+            let contactsVC: ChatHomeVC =  storyboard.instantiateViewController(withIdentifier: ChatHomeVC.storyboardIdentifier) as! ChatHomeVC
             
             contactsVC.tabBarItem.selectedImage = UIImage(named: "chat_selected")
             contactsVC.tabBarItem.image = UIImage(named: "chat_deselected")
@@ -50,8 +50,10 @@ struct Route {
             UINavigationController(rootViewController: $0)
         }
         
-        switchRootViewController(viewController: tabBarController, animated: true, completion: {
-            appDelegate.tabBarController = tabBarController
+        switchRootViewController(viewController: tabBarController,
+                                 animated: true,
+                                 completion: {
+                                    appDelegate.tabBarController = tabBarController
         })
         
     }
@@ -62,8 +64,13 @@ struct Route {
         switchRootViewController(viewController: loginVC, animated: true, completion: nil)
     }
     
-    static func switchRootViewController(viewController: UIViewController, animated: Bool, completion:(() -> Void)?) {
+    static func switchRootViewController(viewController: UIViewController,
+                                         animated: Bool,
+                                         options: UIViewAnimationOptions = .transitionCrossDissolve,
+                                         completion:(() -> Void)?) {
+        
         print(#function)
+        
         guard let window = appDelegate.window else {
             print("Appdelegate window not found")
             return
@@ -74,7 +81,7 @@ struct Route {
             window.makeKeyAndVisible()
             completion?()
         } else {
-            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            UIView.transition(with: window, duration: 0.5, options: options, animations: {
                 
                 let oldState: Bool = UIView.areAnimationsEnabled
                 UIView.setAnimationsEnabled(false)

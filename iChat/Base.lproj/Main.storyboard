@@ -345,7 +345,7 @@
             </objects>
             <point key="canvasLocation" x="-1585" y="1503"/>
         </scene>
-        <!--ProfileVC-->
+        <!--Profile-->
         <scene sceneID="uZ1-ku-aj2">
             <objects>
                 <viewController storyboardIdentifier="ProfileVC" id="OGs-o9-auL" customClass="ProfileVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -353,54 +353,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Is7-yX-8iS">
-                                <rect key="frame" x="137" y="99" width="100" height="100"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_deselected" translatesAutoresizingMaskIntoConstraints="NO" id="1wM-9Y-KKd">
+                                <rect key="frame" x="137.5" y="84" width="100" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="hBP-U7-ade"/>
-                                    <constraint firstAttribute="width" constant="100" id="rl9-Ug-eUW"/>
+                                    <constraint firstAttribute="height" constant="100" id="n15-w6-ASw"/>
+                                    <constraint firstAttribute="width" constant="100" id="wKZ-c1-RwM"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avF-xz-YmO">
-                                <rect key="frame" x="157" y="249" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.87144315240000003" green="0.39403993549999999" blue="0.35511917980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="6ER-eg-QKA"/>
-                                    <constraint firstAttribute="width" constant="60" id="H52-Bd-9yM"/>
-                                </constraints>
-                                <state key="normal" title="Edit"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJB-ip-PjB">
+                                <rect key="frame" x="137.5" y="84.5" width="100" height="100"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="editDidPressed:" destination="OGs-o9-auL" eventType="touchUpInside" id="KUG-nD-t8q"/>
+                                    <action selector="editDidPressed:" destination="OGs-o9-auL" eventType="touchUpInside" id="gfu-Mh-PXv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytU-82-JAW">
-                                <rect key="frame" x="157" y="348" width="60" height="60"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="display name" placeholder="Display name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xWe-Bi-fIx">
+                                <rect key="frame" x="16" y="200" width="343" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="XTK-h1-FS6"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="OGs-o9-auL" id="TPK-eo-zl4"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc7-0V-qsm">
+                                <rect key="frame" x="161.5" y="247" width="51" height="30"/>
                                 <state key="normal" title="Update"/>
                                 <connections>
-                                    <action selector="updateDidPressed:" destination="OGs-o9-auL" eventType="touchUpInside" id="GeZ-Gh-dY8"/>
+                                    <action selector="saveButtonAction:" destination="OGs-o9-auL" eventType="touchUpInside" id="mdZ-h7-puY"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="avF-xz-YmO" firstAttribute="centerX" secondItem="hLG-Fa-M1N" secondAttribute="centerX" id="ArW-Cr-l9W"/>
-                            <constraint firstItem="ytU-82-JAW" firstAttribute="width" secondItem="avF-xz-YmO" secondAttribute="width" id="Jdf-Gm-wah"/>
-                            <constraint firstItem="avF-xz-YmO" firstAttribute="top" secondItem="Is7-yX-8iS" secondAttribute="bottom" constant="50" id="QCZ-AP-WoA"/>
-                            <constraint firstItem="ytU-82-JAW" firstAttribute="top" secondItem="avF-xz-YmO" secondAttribute="bottom" constant="39" id="f1K-je-WKt"/>
-                            <constraint firstItem="Is7-yX-8iS" firstAttribute="centerX" secondItem="hLG-Fa-M1N" secondAttribute="centerX" id="fAs-Ma-DAf"/>
-                            <constraint firstItem="ytU-82-JAW" firstAttribute="centerX" secondItem="avF-xz-YmO" secondAttribute="centerX" id="gBb-Ne-cQX"/>
-                            <constraint firstItem="Is7-yX-8iS" firstAttribute="top" secondItem="l5i-PI-2wU" secondAttribute="top" constant="35" id="rxQ-OR-8Yj"/>
-                            <constraint firstItem="ytU-82-JAW" firstAttribute="height" secondItem="avF-xz-YmO" secondAttribute="height" id="xIR-Ie-UgK"/>
+                            <constraint firstItem="iJB-ip-PjB" firstAttribute="centerY" secondItem="1wM-9Y-KKd" secondAttribute="centerY" id="1HP-mr-gNO"/>
+                            <constraint firstItem="1wM-9Y-KKd" firstAttribute="centerX" secondItem="hLG-Fa-M1N" secondAttribute="centerX" id="IDE-XR-Vh6"/>
+                            <constraint firstItem="xWe-Bi-fIx" firstAttribute="centerX" secondItem="l5i-PI-2wU" secondAttribute="centerX" id="WWb-Yw-2Bm"/>
+                            <constraint firstItem="iJB-ip-PjB" firstAttribute="width" secondItem="1wM-9Y-KKd" secondAttribute="width" id="Z8V-rU-cIK"/>
+                            <constraint firstItem="1wM-9Y-KKd" firstAttribute="top" secondItem="l5i-PI-2wU" secondAttribute="top" constant="20" id="i7A-BK-HRo"/>
+                            <constraint firstItem="Dc7-0V-qsm" firstAttribute="top" secondItem="xWe-Bi-fIx" secondAttribute="bottom" constant="27" id="ioa-vF-zYP"/>
+                            <constraint firstItem="xWe-Bi-fIx" firstAttribute="width" secondItem="hLG-Fa-M1N" secondAttribute="width" constant="-32" id="krS-de-5bc"/>
+                            <constraint firstItem="iJB-ip-PjB" firstAttribute="height" secondItem="1wM-9Y-KKd" secondAttribute="height" id="pgo-iZ-lZH"/>
+                            <constraint firstItem="iJB-ip-PjB" firstAttribute="centerX" secondItem="1wM-9Y-KKd" secondAttribute="centerX" id="qp7-DS-Y6r"/>
+                            <constraint firstItem="Dc7-0V-qsm" firstAttribute="centerX" secondItem="hLG-Fa-M1N" secondAttribute="centerX" id="tvB-L5-wyd"/>
+                            <constraint firstItem="xWe-Bi-fIx" firstAttribute="top" secondItem="1wM-9Y-KKd" secondAttribute="bottom" constant="16" id="wCR-zq-MHB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l5i-PI-2wU"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hYH-aS-xrB"/>
+                    <navigationItem key="navigationItem" title="Profile" id="hYH-aS-xrB">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="oJa-hl-S81">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="logoutButtonAction:" destination="OGs-o9-auL" id="Q8W-nu-agz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="profilePic" destination="Is7-yX-8iS" id="mfw-Df-slg"/>
+                        <outlet property="displayNameField" destination="xWe-Bi-fIx" id="WfX-YI-fmW"/>
+                        <outlet property="profilePic" destination="1wM-9Y-KKd" id="RGl-HV-sYc"/>
+                        <outlet property="updateButton" destination="Dc7-0V-qsm" id="oKz-nR-wuN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frm-Bz-cbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1456.8" y="2311.394302848576"/>
+            <point key="canvasLocation" x="-1418.4000000000001" y="2309.5952023988007"/>
         </scene>
         <!--LoginNavigationController-->
         <scene sceneID="P91-19-fTY">
@@ -426,53 +454,27 @@
             </objects>
             <point key="canvasLocation" x="-2726" y="247"/>
         </scene>
-        <!--ContactVC-->
+        <!--ChatHomeVC-->
         <scene sceneID="Xrv-eT-gFs">
             <objects>
-                <tableViewController storyboardIdentifier="ContactsVC" id="uwt-CO-P3S" userLabel="ContactVC" customClass="ContactsVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="opp-gI-rjj">
+                <tableViewController storyboardIdentifier="ChatHomeVC" id="uwt-CO-P3S" userLabel="ChatHomeVC" customClass="ChatHomeVC" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="opp-gI-rjj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExistingChannel" textLabel="OTS-la-gs3" style="IBUITableViewCellStyleDefault" id="tfz-UD-RxH">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tfz-UD-RxH" id="kyL-wZ-DNK">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OTS-la-gs3">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="uwt-CO-P3S" id="Phn-49-Y9f"/>
                             <outlet property="delegate" destination="uwt-CO-P3S" id="1wL-kz-bti"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="71B-V6-cCx">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="ewE-eW-nvB">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="logoutDidPress:" destination="uwt-CO-P3S" id="G37-0Z-yon"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="71B-V6-cCx"/>
                     <connections>
                         <segue destination="mC9-1X-hI2" kind="show" identifier="ShowChat" id="gsS-xF-FrM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0H2-KT-LSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1078" y="247"/>
+            <point key="canvasLocation" x="-1079.2" y="246.9265367316342"/>
         </scene>
         <!--EmailNavigationController-->
         <scene sceneID="JEL-wq-AGg">
@@ -763,4 +765,7 @@
             <point key="canvasLocation" x="-3497" y="247"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile_deselected" width="33" height="33"/>
+    </resources>
 </document>

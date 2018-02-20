@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProfileHeaderView" customModule="iChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_selected" translatesAutoresizingMaskIntoConstraints="NO" id="egq-o8-4C8">
+                    <rect key="frame" x="157" y="16" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Ax9-d0-i0H"/>
+                        <constraint firstAttribute="height" constant="60" id="uPD-yJ-9JA"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zev-EO-GTy">
+                    <rect key="frame" x="15.5" y="106" width="343" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogw-YN-k1J" userLabel="edit profile pic">
+                    <rect key="frame" x="157" y="46" width="60" height="30"/>
+                    <state key="normal" title="Edit"/>
+                    <connections>
+                        <action selector="editProfilePicButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="jho-Qx-tx1"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XX2-UC-e0q" userLabel="Edit Profile name">
+                    <rect key="frame" x="15.5" y="106" width="343" height="30"/>
+                    <connections>
+                        <action selector="editProfileNameButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="FZ1-TS-5Ca"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="zev-EO-GTy" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="55C-Ur-kM9"/>
+                <constraint firstItem="XX2-UC-e0q" firstAttribute="width" secondItem="zev-EO-GTy" secondAttribute="width" id="5MN-vu-bjE"/>
+                <constraint firstItem="zev-EO-GTy" firstAttribute="top" secondItem="egq-o8-4C8" secondAttribute="bottom" constant="30" id="BnW-KQ-peU"/>
+                <constraint firstItem="XX2-UC-e0q" firstAttribute="centerX" secondItem="zev-EO-GTy" secondAttribute="centerX" id="En5-HB-ReP"/>
+                <constraint firstItem="XX2-UC-e0q" firstAttribute="height" secondItem="zev-EO-GTy" secondAttribute="height" id="GMx-ha-c0S"/>
+                <constraint firstItem="Ogw-YN-k1J" firstAttribute="bottom" secondItem="egq-o8-4C8" secondAttribute="bottom" id="Pyc-ff-7op"/>
+                <constraint firstItem="egq-o8-4C8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="QvB-vF-N6N"/>
+                <constraint firstItem="XX2-UC-e0q" firstAttribute="centerY" secondItem="zev-EO-GTy" secondAttribute="centerY" id="TrM-fC-lOb"/>
+                <constraint firstItem="Ogw-YN-k1J" firstAttribute="centerX" secondItem="egq-o8-4C8" secondAttribute="centerX" id="dCn-aa-okJ"/>
+                <constraint firstItem="Ogw-YN-k1J" firstAttribute="width" secondItem="egq-o8-4C8" secondAttribute="width" id="m8o-y2-koD"/>
+                <constraint firstItem="zev-EO-GTy" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-32" id="pvs-tY-6fK"/>
+                <constraint firstItem="egq-o8-4C8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="wOw-Ug-f8R"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="profileName" destination="zev-EO-GTy" id="b9h-D5-4DY"/>
+                <outlet property="profilePic" destination="egq-o8-4C8" id="P5j-JO-mIm"/>
+            </connections>
+            <point key="canvasLocation" x="-21.5" y="-680"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="profile_selected" width="33" height="33"/>
+    </resources>
+</document>

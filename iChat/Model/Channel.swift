@@ -8,39 +8,45 @@
 
 import Foundation
 import Firebase
-
-//internal class Channel {
-//    internal let id: String
-//    internal let name: String
-//
-//    init(id: String, name: String) {
-//        self.id = id
-//        self.name = name
-//    }
-//}
-
 /*
 {
     id: {
-        {  name :  ""  },
-        {  members: [] }
+          name :  ""
+          members: []
+            isGroup : Boolean
     }
 }
 */
 
 internal struct Channel {
     var id: String
-    var name: String = "anonymous"
-    var members: [String] = []
+    var name: String? = "anonymous"
+    var members: [String]? = []
+    var isGroup: Bool? = false
+    var senderId: String?
+    var receiverId: String?
+    var lastMessage: String?
+    
     init(id: String) {
         self.id = id
         members = []
     }
     init(id: String,
-         name: String) {
+         name: String = "anonymous",
+         members: [String]? = [],
+         isGroup: Bool? = false,
+         senderId: String? = nil,
+         receiverId: String? = nil,
+         lastMessage: String? = nil) {
         self.id = id
         self.name = name
+        self.members = members
+        self.isGroup = isGroup
+        self.senderId = senderId
+        self.receiverId = receiverId
+        self.lastMessage = lastMessage
     }
+    
     init(id: String,
          name: String,
          members: [String]) {
@@ -49,11 +55,26 @@ internal struct Channel {
         self.members = members
     }
 
+    init(snapshot: DataSnapshot) {
+        self.id = snapshot.key
+        if let value = snapshot.value as? [String: Any] {
+            self.name = value[Fields.name] as? String
+            self.members = value[Fields.members] as? [String]
+            self.isGroup = value[Fields.isGroup] as? Bool
+            self.senderId = value[Fields.senderId] as? String
+            self.receiverId = value[Fields.receiverId] as? String
+            self.lastMessage = value[Fields.lastMessage] as? String
+        }
+    }
     
     func toJSON() -> Any {
         return [
-            Fields.members : self.members,
-            Fields.name  : self.name
+            Fields.members  : self.members,
+            Fields.name     : self.name,
+            Fields.senderId : self.senderId,
+            Fields.isGroup  : self.isGroup,
+            Fields.lastMessage : self.lastMessage,
+            Fields.receiverId   : self.receiverId
         ]
     }
     
@@ -91,6 +112,10 @@ extension Channel {
         static let id       = "id"
         static let name     = "name"
         static let members  = "members"
+        static let isGroup  = "isGroup"
+        static let senderId  = "senderId"
+        static let lastMessage  = "lastMessage"
+        static let receiverId   = "receiverId"
     }
 }
 

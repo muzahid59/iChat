@@ -17,12 +17,19 @@ import ImageIO
 final class ChatVC: JSQMessagesViewController {
     
     // channel properties
-    var channelRef: DatabaseReference?
+    private lazy var channelRef: DatabaseReference? = {
+        var ref: DatabaseReference? = nil
+        if let fromContact = Session.loggedUser, let receiver = self.receiver {
+            let newRef = Channel.createChannel(from: fromContact, to: receiver)
+            return newRef
+        }
+        return nil
+    }()
     
-    var sender: Contact? {
+    var receiver: Contact? {
         didSet {
-            title = sender?.displayName
-            if let id = sender?.uid {
+            title = receiver?.displayName
+            if let id = receiver?.uid {
                 senderId = id
             }
             
@@ -98,7 +105,7 @@ final class ChatVC: JSQMessagesViewController {
         // new message addition handle
         newMessageHandle = messageQuery?.queryOrdered(byChild: Message.Fields.channelId).queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { (snapshot) in
             if let messageData = snapshot.value as? [String : Any] {
-                if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self.sender?.displayName {
+                if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self.receiver?.displayName {
                     
                     self.addMessage(withId: senderId, name: displyaName, text: text)
                     self.finishReceivingMessage()
@@ -168,6 +175,7 @@ final class ChatVC: JSQMessagesViewController {
 
     /// Send Photo message, with dummy url
     private func sendPhotoMessage() -> String? {
+        
         let itemRef = messageRef?.childByAutoId()
         let messageItem = [
             Message.Fields.photoUrl     : imageURLNotSetKey,
@@ -313,8 +321,19 @@ final class ChatVC: JSQMessagesViewController {
 
 extension ChatVC {
     
-    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        let itemRef = messageRef?.childByAutoId()
+    fileprivate func updateChannelLastMessage(_ text: String!, _ senderId: String!) {
+        // fire db message set values
+        
+        self.channelRef?.setValue([
+            Channel.Fields.lastMessage : text,
+            Channel.Fields.senderId : senderId,
+            Channel.Fields.receiverId : receiver?.uid
+            ])
+    }
+    
+    fileprivate func createNewFireDBMessage(_ text: String!, _ senderId: String!) {
+        
+        let itemRef = messageRef?.childByAutoId() // create new message
         
         let messageItem = [
             Message.Fields.senderId : senderId,
@@ -322,6 +341,14 @@ extension ChatVC {
             Message.Fields.channelId : channelRef?.key
         ]
         itemRef?.setValue(messageItem)
+    }
+    
+    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+        
+        
+        createNewFireDBMessage(text, senderId)
+        updateChannelLastMessage(text, senderId)
+        
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         finishSendingMessage()
         isTyping = false

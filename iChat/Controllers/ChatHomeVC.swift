@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class ContactsVC: UITableViewController {
+class ChatHomeVC: UITableViewController {
     
     enum Section: Int {
         case currentChannelsSection = 0
@@ -20,7 +20,7 @@ class ContactsVC: UITableViewController {
     var newChannelTextField: UITextField?
     
     private var contacts: [Contact] = []
-    
+    private var channels: [Channel] = []
     private lazy var contactRef: DatabaseReference = Database.database().reference().child(DBRef.contact.rawValue)
     
     private var contactRefHandle: DatabaseHandle?
@@ -38,8 +38,12 @@ class ContactsVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationItem.title = Session.loggedUser?.displayName
-       // self.navigationItem.setHidesBackButton(true, animated: false)
-        observeContacts()
+        
+        tableView.register(UINib(nibName: "ChatHomeCell", bundle: nil), forCellReuseIdentifier: "ChatHomeCell")
+        tableView.tableFooterView = UIView()
+        
+     //   observeContacts()
+        observeChannel()
     }
     
     deinit {
@@ -48,6 +52,7 @@ class ContactsVC: UITableViewController {
             contactRef.removeObserver(withHandle: refHandle)
         }
     }
+    
     // MARK:- FireBase Related Methods
     
     private func observeContacts() {
@@ -63,19 +68,29 @@ class ContactsVC: UITableViewController {
         })
     }
     
+    private func observeChannel() {
+        guard let uid = Session.loggedUser?.uid else {
+            return
+        }
+        let channelRef = DBRef.channel.ref
+        channelRef?.queryOrdered(byChild: Channel.Fields.receiverId).queryEqual(toValue: uid).observe(.childAdded, with: { (snapshot) in
+            let channel = Channel(snapshot: snapshot)
+            self.channels.append(channel)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            if let value = snapshot.value as? [String : Any] {
+                print("last message",value[Channel.Fields.lastMessage] as? String)
+            }
+            
+        })
+       
+    }
+    
+    
 
     
     // MARK:- Action
-    
-    @IBAction func logoutDidPress(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            Route.setLoginVCAsRoot()
-        } catch  {
-            print("signout error")
-        }
-    }
-    
     
     // MARK: UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -86,7 +101,7 @@ class ContactsVC: UITableViewController {
         if let currentSection: Section = Section(rawValue: section) {
             switch currentSection {
             case .currentChannelsSection:
-                return contacts.count
+                return channels.count
             }
         } else {
             return 0
@@ -95,11 +110,12 @@ class ContactsVC: UITableViewController {
     
     // 3
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let reuseIdentifier = "ExistingChannel"
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let reuseIdentifier = "ChatHomeCell"
+        let cell: ChatHomeCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ChatHomeCell
         
         if (indexPath as NSIndexPath).section == Section.currentChannelsSection.rawValue {
-            cell.textLabel?.text = contacts[(indexPath as NSIndexPath).row].displayName
+           // cell.displayNameLabel.text = contacts[(indexPath as NSIndexPath).row].displayName
+            cell.lastMessageLabel.text = channels[(indexPath as NSIndexPath).row].lastMessage
         }
         
         return cell
@@ -115,12 +131,6 @@ class ContactsVC: UITableViewController {
                 
                 if let channelRef: DatabaseReference = DBRef.channel.ref {
                     
-                    let newRef = Channel.createChannel(from: fromContact, to: toContact)
-                    
-                    /// Assing ref to respective channel members
-                    Session.loggedUser?.ref = newRef
-                    toContact.ref = newRef
-                    
                     self.performSegue(withIdentifier: "ShowChat", sender: toContact)
                 }
                 
@@ -135,8 +145,8 @@ class ContactsVC: UITableViewController {
         
         if let contact = sender as? Contact {
             if let chatViewController = segue.destination as?  ChatVC {
-                chatViewController.channelRef = contact.ref
-                chatViewController.sender = contact
+              //  chatViewController.channelRef = contact.channelRef
+                chatViewController.receiver = contact
                 chatViewController.senderDisplayName = contact.displayName
             }
         }

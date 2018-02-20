@@ -26,6 +26,11 @@
 		4AC69B5B202862E100B2736A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B5A202862E100B2736A /* ChatVC.swift */; };
 		4AC69B5F2028635500B2736A /* CreateChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B5E2028635500B2736A /* CreateChannelCell.swift */; };
 		4AC69B6420286E3000B2736A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */; };
+		4ADDB230203989340022148E /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB22F203989330022148E /* ProfileHeaderView.swift */; };
+		4ADDB232203989790022148E /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDB231203989790022148E /* ProfileHeaderView.xib */; };
+		4ADDB234203AE6600022148E /* ImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB233203AE6600022148E /* ImageViewExtensions.swift */; };
+		4ADDB237203C19650022148E /* ChatHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB235203C19650022148E /* ChatHomeCell.swift */; };
+		4ADDB238203C19650022148E /* ChatHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDB236203C19650022148E /* ChatHomeCell.xib */; };
 		4AF6DB8720300EE100FB38EE /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8620300EE100FB38EE /* Channel.swift */; };
 		4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8A20304C3000FB38EE /* Session.swift */; };
 		4AF6DB8D2031714600FB38EE /* UserNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8C2031714600FB38EE /* UserNameVC.swift */; };
@@ -34,7 +39,7 @@
 		4AF6DB942031B7FD00FB38EE /* FBUserExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB932031B7FD00FB38EE /* FBUserExtras.swift */; };
 		4AF6DB982032C4CD00FB38EE /* StoryBoardExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB972032C4CD00FB38EE /* StoryBoardExtras.swift */; };
 		4AF6DB9A2032E1E300FB38EE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB992032E1E300FB38EE /* Router.swift */; };
-		4AF6DB9C2032E34A00FB38EE /* ContactsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB9B2032E34A00FB38EE /* ContactsVC.swift */; };
+		4AF6DB9C2032E34A00FB38EE /* ChatHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB9B2032E34A00FB38EE /* ChatHomeVC.swift */; };
 		4AF6DB9E2032F41600FB38EE /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB9D2032F41600FB38EE /* ProfileVC.swift */; };
 		F7AFB7D12BF89A053F6692FE /* Pods_iChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BC1B7D710B9DA63D6EB716 /* Pods_iChatUITests.framework */; };
 /* End PBXBuildFile section */
@@ -82,6 +87,11 @@
 		4AC69B5E2028635500B2736A /* CreateChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelCell.swift; sourceTree = "<group>"; };
 		4AC69B602028638D00B2736A /* iChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iChat.entitlements; sourceTree = "<group>"; };
 		4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ADDB22F203989330022148E /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		4ADDB231203989790022148E /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		4ADDB233203AE6600022148E /* ImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtensions.swift; sourceTree = "<group>"; };
+		4ADDB235203C19650022148E /* ChatHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHomeCell.swift; sourceTree = "<group>"; };
+		4ADDB236203C19650022148E /* ChatHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatHomeCell.xib; sourceTree = "<group>"; };
 		4AF6DB8620300EE100FB38EE /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		4AF6DB8A20304C3000FB38EE /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4AF6DB8C2031714600FB38EE /* UserNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameVC.swift; sourceTree = "<group>"; };
@@ -90,7 +100,7 @@
 		4AF6DB932031B7FD00FB38EE /* FBUserExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBUserExtras.swift; sourceTree = "<group>"; };
 		4AF6DB972032C4CD00FB38EE /* StoryBoardExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBoardExtras.swift; sourceTree = "<group>"; };
 		4AF6DB992032E1E300FB38EE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		4AF6DB9B2032E34A00FB38EE /* ContactsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsVC.swift; sourceTree = "<group>"; };
+		4AF6DB9B2032E34A00FB38EE /* ChatHomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHomeVC.swift; sourceTree = "<group>"; };
 		4AF6DB9D2032F41600FB38EE /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		6B6FCFC10646FDC9F5A3966B /* Pods-iChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		86BC684997D7BE9D3B7BBB0F /* Pods-iChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iChatUITests/Pods-iChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,7 +194,7 @@
 				4AF6DB922031AE8600FB38EE /* Controllers */,
 				4A245EFA202EE11900B0C855 /* SignUpVC.swift */,
 				4A245EFC202EE14100B0C855 /* LandingVC.swift */,
-				4AF6DB9F2032F46F00FB38EE /* Custom */,
+				4AF6DB9F2032F46F00FB38EE /* CustomView */,
 				4AF6DB952032C0B700FB38EE /* Extensions */,
 				4AF6DB962032C0D800FB38EE /* Utilities */,
 				4A245EFE202F245600B0C855 /* Model */,
@@ -221,7 +231,7 @@
 			children = (
 				4AC69B542028628C00B2736A /* LoginVC.swift */,
 				4AF6DB9D2032F41600FB38EE /* ProfileVC.swift */,
-				4AF6DB9B2032E34A00FB38EE /* ContactsVC.swift */,
+				4AF6DB9B2032E34A00FB38EE /* ChatHomeVC.swift */,
 				4AF6DB8C2031714600FB38EE /* UserNameVC.swift */,
 				4AF6DB8E2031715800FB38EE /* PasswordVC.swift */,
 				4AF6DB902031717700FB38EE /* EmailVC.swift */,
@@ -234,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				4AF6DB932031B7FD00FB38EE /* FBUserExtras.swift */,
+				4ADDB233203AE6600022148E /* ImageViewExtensions.swift */,
 				4AF6DB972032C4CD00FB38EE /* StoryBoardExtras.swift */,
 			);
 			path = Extensions;
@@ -250,11 +261,15 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		4AF6DB9F2032F46F00FB38EE /* Custom */ = {
+		4AF6DB9F2032F46F00FB38EE /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				4ADDB235203C19650022148E /* ChatHomeCell.swift */,
+				4ADDB236203C19650022148E /* ChatHomeCell.xib */,
+				4ADDB22F203989330022148E /* ProfileHeaderView.swift */,
+				4ADDB231203989790022148E /* ProfileHeaderView.xib */,
 			);
-			path = Custom;
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		B178E58738A0077CD5C22E9B /* Frameworks */ = {
@@ -392,6 +407,8 @@
 				4AC69B6420286E3000B2736A /* GoogleService-Info.plist in Resources */,
 				4AC69B2E202860E000B2736A /* Assets.xcassets in Resources */,
 				4AC69B29202860E000B2736A /* Main.storyboard in Resources */,
+				4ADDB238203C19650022148E /* ChatHomeCell.xib in Resources */,
+				4ADDB232203989790022148E /* ProfileHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,10 +601,13 @@
 				4A245EFB202EE11900B0C855 /* SignUpVC.swift in Sources */,
 				4AC69B552028628C00B2736A /* LoginVC.swift in Sources */,
 				4A245EF7202AF9FD00B0C855 /* Utility.swift in Sources */,
+				4ADDB237203C19650022148E /* ChatHomeCell.swift in Sources */,
+				4ADDB234203AE6600022148E /* ImageViewExtensions.swift in Sources */,
 				4AC69B2C202860E000B2736A /* iChat.xcdatamodeld in Sources */,
 				4AF6DB8F2031715800FB38EE /* PasswordVC.swift in Sources */,
 				4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */,
 				4A245EF9202AFA8600B0C855 /* DBRef.swift in Sources */,
+				4ADDB230203989340022148E /* ProfileHeaderView.swift in Sources */,
 				4AF6DB8D2031714600FB38EE /* UserNameVC.swift in Sources */,
 				4AF6DB8720300EE100FB38EE /* Channel.swift in Sources */,
 				4AC69B24202860E000B2736A /* AppDelegate.swift in Sources */,
@@ -598,7 +618,7 @@
 				4A245F02202FCF0000B0C855 /* Message.swift in Sources */,
 				4AF6DB942031B7FD00FB38EE /* FBUserExtras.swift in Sources */,
 				4AF6DB9E2032F41600FB38EE /* ProfileVC.swift in Sources */,
-				4AF6DB9C2032E34A00FB38EE /* ContactsVC.swift in Sources */,
+				4AF6DB9C2032E34A00FB38EE /* ChatHomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
