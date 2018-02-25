@@ -12,48 +12,42 @@ import UIKit
 extension UIImageView {
     
     func setImage(urlStr: String?) {
-        
-//        weak var spinner: UIActivityIndicatorView ()
-//        translatesAutoresizingMaskIntoConstraints = false
-//        spinner.center = self.center
-//        spinner.startAnimating()
-//        addSubview(spinner)
         guard let urlStr = urlStr, let url = URL(string:urlStr)  else {
-//            spinner.stopAnimating()
             return
         }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                DispatchQueue.main.async {
-                    if let data = data {
-                        let image = UIImage(data: data)
-                        self.image = image
-                    }
-                   
-                }
-            }
-            }.resume()
+        setImage(url: url)
     }
+    
     func setImage(url: URL?) {
         
         guard  let url = url  else {
             return
         }
+        getImage(from: url) { (image) in
+            self.image = image
+        }
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                DispatchQueue.main.async {
+    }
+    
+    /// Download Image from url
+    func getImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error.localizedDescription)
+                    completion(nil)
+                } else {
+                    
                     if let data = data {
                         let image = UIImage(data: data)
-                        self.image = image
+                        completion(image)
+                    } else {
+                        completion(nil)
                     }
                 }
             }
-            }.resume()
+        }
+        task.resume()
     }
+    
 }

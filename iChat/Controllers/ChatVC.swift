@@ -19,20 +19,17 @@ final class ChatVC: JSQMessagesViewController {
     // channel properties
     private lazy var channelRef: DatabaseReference? = {
         var ref: DatabaseReference? = nil
-        if let fromContact = Session.loggedUser, let receiver = self.receiver {
+        if let fromContact = Session.loggedUser, let receiver = self.toContact {
             let newRef = Channel.createChannel(from: fromContact, to: receiver)
             return newRef
         }
         return nil
     }()
     
-    var receiver: Contact? {
+    /// to whom message has to send
+    var toContact: Contact? {
         didSet {
-            title = receiver?.displayName
-            if let id = receiver?.uid {
-                senderId = id
-            }
-            
+            title = toContact?.displayName
         }
     }
     
@@ -105,7 +102,7 @@ final class ChatVC: JSQMessagesViewController {
         // new message addition handle
         newMessageHandle = messageQuery?.queryOrdered(byChild: Message.Fields.channelId).queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { (snapshot) in
             if let messageData = snapshot.value as? [String : Any] {
-                if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self.receiver?.displayName {
+                if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self.toContact?.displayName {
                     
                     self.addMessage(withId: senderId, name: displyaName, text: text)
                     self.finishReceivingMessage()
@@ -323,12 +320,11 @@ extension ChatVC {
     
     fileprivate func updateChannelLastMessage(_ text: String!, _ senderId: String!) {
         // fire db message set values
-        
-        self.channelRef?.setValue([
-            Channel.Fields.lastMessage : text,
-            Channel.Fields.senderId : senderId,
-            Channel.Fields.receiverId : receiver?.uid
-            ])
+        self.channelRef?.child(Channel.Fields.lastMessage).setValue(text)
+        self.channelRef?.child(Channel.Fields.senderId).setValue(senderId)
+        self.channelRef?.child(Channel.Fields.receiverId).setValue(toContact?.uid)
+    self.channelRef?.child(Channel.Fields.senderDisplayName).setValue(Session.loggedUser?.displayName)
+
     }
     
     fileprivate func createNewFireDBMessage(_ text: String!, _ senderId: String!) {

@@ -31,6 +31,9 @@
 		4ADDB234203AE6600022148E /* ImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB233203AE6600022148E /* ImageViewExtensions.swift */; };
 		4ADDB237203C19650022148E /* ChatHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB235203C19650022148E /* ChatHomeCell.swift */; };
 		4ADDB238203C19650022148E /* ChatHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDB236203C19650022148E /* ChatHomeCell.xib */; };
+		4ADDB23A203D157D0022148E /* FriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB239203D157D0022148E /* FriendsVC.swift */; };
+		4ADDB23D203D16EC0022148E /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB23B203D16EC0022148E /* FriendsCell.swift */; };
+		4ADDB23E203D16EC0022148E /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDB23C203D16EC0022148E /* FriendsCell.xib */; };
 		4AF6DB8720300EE100FB38EE /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8620300EE100FB38EE /* Channel.swift */; };
 		4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8A20304C3000FB38EE /* Session.swift */; };
 		4AF6DB8D2031714600FB38EE /* UserNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6DB8C2031714600FB38EE /* UserNameVC.swift */; };
@@ -92,6 +95,9 @@
 		4ADDB233203AE6600022148E /* ImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtensions.swift; sourceTree = "<group>"; };
 		4ADDB235203C19650022148E /* ChatHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHomeCell.swift; sourceTree = "<group>"; };
 		4ADDB236203C19650022148E /* ChatHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatHomeCell.xib; sourceTree = "<group>"; };
+		4ADDB239203D157D0022148E /* FriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsVC.swift; sourceTree = "<group>"; };
+		4ADDB23B203D16EC0022148E /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
+		4ADDB23C203D16EC0022148E /* FriendsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
 		4AF6DB8620300EE100FB38EE /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		4AF6DB8A20304C3000FB38EE /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4AF6DB8C2031714600FB38EE /* UserNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameVC.swift; sourceTree = "<group>"; };
@@ -232,6 +238,7 @@
 				4AC69B542028628C00B2736A /* LoginVC.swift */,
 				4AF6DB9D2032F41600FB38EE /* ProfileVC.swift */,
 				4AF6DB9B2032E34A00FB38EE /* ChatHomeVC.swift */,
+				4ADDB239203D157D0022148E /* FriendsVC.swift */,
 				4AF6DB8C2031714600FB38EE /* UserNameVC.swift */,
 				4AF6DB8E2031715800FB38EE /* PasswordVC.swift */,
 				4AF6DB902031717700FB38EE /* EmailVC.swift */,
@@ -264,10 +271,12 @@
 		4AF6DB9F2032F46F00FB38EE /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				4ADDB231203989790022148E /* ProfileHeaderView.xib */,
 				4ADDB235203C19650022148E /* ChatHomeCell.swift */,
 				4ADDB236203C19650022148E /* ChatHomeCell.xib */,
 				4ADDB22F203989330022148E /* ProfileHeaderView.swift */,
-				4ADDB231203989790022148E /* ProfileHeaderView.xib */,
+				4ADDB23B203D16EC0022148E /* FriendsCell.swift */,
+				4ADDB23C203D16EC0022148E /* FriendsCell.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -295,6 +304,7 @@
 				4AC69B1E202860E000B2736A /* Resources */,
 				220FB82F311964F83D86C03A /* [CP] Embed Pods Frameworks */,
 				CA29E2867ADC69ECB63BEDB4 /* [CP] Copy Pods Resources */,
+				4ACA069820407CE40073FC1A /* Custom Warning */,
 			);
 			buildRules = (
 			);
@@ -404,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AC69B31202860E000B2736A /* LaunchScreen.storyboard in Resources */,
+				4ADDB23E203D16EC0022148E /* FriendsCell.xib in Resources */,
 				4AC69B6420286E3000B2736A /* GoogleService-Info.plist in Resources */,
 				4AC69B2E202860E000B2736A /* Assets.xcassets in Resources */,
 				4AC69B29202860E000B2736A /* Main.storyboard in Resources */,
@@ -491,6 +502,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iChatTests/Pods-iChatTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4ACA069820407CE40073FC1A /* Custom Warning */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Custom Warning";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:|WARNING:\"";
 		};
 		66923862F0C7BB9DF7F258B2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -616,9 +641,11 @@
 				4A245EFD202EE14100B0C855 /* LandingVC.swift in Sources */,
 				4AC69B5F2028635500B2736A /* CreateChannelCell.swift in Sources */,
 				4A245F02202FCF0000B0C855 /* Message.swift in Sources */,
+				4ADDB23D203D16EC0022148E /* FriendsCell.swift in Sources */,
 				4AF6DB942031B7FD00FB38EE /* FBUserExtras.swift in Sources */,
 				4AF6DB9E2032F41600FB38EE /* ProfileVC.swift in Sources */,
 				4AF6DB9C2032E34A00FB38EE /* ChatHomeVC.swift in Sources */,
+				4ADDB23A203D157D0022148E /* FriendsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

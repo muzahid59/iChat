@@ -22,6 +22,7 @@ struct Contact {
         self.displayName = user.displayName
         self.photoUrl = user.photoURL?.absoluteString
     }
+    
     init(uid: String) {
         self.uid = uid
     }
@@ -29,22 +30,31 @@ struct Contact {
     init(snapshot: DataSnapshot) {
         self.uid = snapshot.key
         if let value = snapshot.value as? [String: Any] {
-            self.email = value[fields.email] as? String
-            self.displayName = value[fields.displayName] as? String
-            self.photoUrl = value[fields.photoUrl] as? String
+            self.email = value[Fields.email] as? String
+            self.displayName = value[Fields.displayName] as? String
+            self.photoUrl = value[Fields.photoUrl] as? String
         }
     }
-    
+   
+}
+
+
+// MARK:- Contact Operations
+
+extension Contact {
+    /// convert into json
     func toJSON() -> Any {
         return [
-            fields.email        : self.email,
-            fields.displayName  : self.displayName,
-            fields.photoUrl     : self.photoUrl
+            Fields.email        : self.email,
+            Fields.displayName  : self.displayName,
+            Fields.photoUrl     : self.photoUrl
         ]
     }
+    
+    /// save contact into firebase db
     func saveIntoFireDB() {
         guard let ref = DBRef.contact.ref else {
-           return
+            return
         }
         let newRef = ref.child(self.uid)
         newRef.setValue(toJSON())
@@ -53,11 +63,14 @@ struct Contact {
 
 // MARK:- All Properties
 
-extension Contact {
-    struct fields {
+extension Contact: CustomStringConvertible {
+    struct Fields {
         static let uid              = "uid"
         static let email            = "email"
         static let displayName      = "displayName"
         static let photoUrl         = "photoUrl"
+    }
+    var description: String {
+        return " uid: \(uid)\n email: \(email) \n displayName: \(displayName) \n photoUrl: \(photoUrl)"
     }
 }

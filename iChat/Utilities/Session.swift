@@ -10,7 +10,7 @@ import Foundation
 
 internal var Session = App.shared
 
-class App {
+internal class App {
     
     var loggedUser: Contact?
     

@@ -26,8 +26,8 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textFieldLoginEmail.text = "mmsaddam@gmail.com"
-        textFieldLoginPassword.text = "qqqqqqqq"
+        textFieldLoginEmail.text = "abc@abc.com"
+        textFieldLoginPassword.text = "11111111"
 
         if let user = Auth.auth().currentUser {
             Session.loggedUser = user.asContact()
@@ -38,6 +38,7 @@ class LoginVC: UIViewController {
 
     deinit {
         print("Login deinit")
+        
     }
 
     // MARK: Actions

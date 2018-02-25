@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-public enum DBRef: String {
+internal enum DBRef: String {
     case message = "message"
     case channel = "channel"
     case typingIndicator = "typingIndicator"

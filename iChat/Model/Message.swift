@@ -27,7 +27,7 @@ import Firebase
      }
  */
 
-struct Message {
+internal struct Message {
     
     var id: String
     var channelId: String?

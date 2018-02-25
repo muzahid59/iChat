@@ -132,7 +132,7 @@ class ProfileVC: UIViewController {
         let contactRef = DBRef.contact.ref
         let contactUid = Session.loggedUser?.uid
         if let id = contactUid {
-            contactRef?.child(id).updateChildValues([Contact.fields.displayName: name])
+            contactRef?.child(id).updateChildValues([Contact.Fields.displayName: name])
         }
         
     }
@@ -160,7 +160,7 @@ class ProfileVC: UIViewController {
         let contactRef = DBRef.contact.ref
         let contactUid = Session.loggedUser?.uid
         if let id = contactUid {
-        contactRef?.child(id).updateChildValues([Contact.fields.photoUrl: urlString])
+        contactRef?.child(id).updateChildValues([Contact.Fields.photoUrl: urlString])
         }
        
     }

@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //IQKeyboardManager.sharedManager().enable = true
       //  UIApplication.shared.nav
     
+        // FIXME: Please fix here
+        // ERROR: SOMETHING WENT WRONG
+        // WARNING: EE
+
         navBarAppearanceSetup()
         return true
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+
 /*
 {
     id: {
@@ -18,78 +19,79 @@ import Firebase
 }
 */
 
+
+internal enum ChatType: String {
+    case Chat
+    case GroupChat
+}
+
 internal struct Channel {
     var id: String
     var name: String? = "anonymous"
     var members: [String]? = []
-    var isGroup: Bool? = false
+    var type: String? = ChatType.Chat.rawValue
     var senderId: String?
+    var senderDisplayName: String?
     var receiverId: String?
     var lastMessage: String?
     
     init(id: String) {
         self.id = id
-        members = []
     }
+    
     init(id: String,
          name: String = "anonymous",
          members: [String]? = [],
-         isGroup: Bool? = false,
          senderId: String? = nil,
+         senderDisplayName: String? = nil,
          receiverId: String? = nil,
          lastMessage: String? = nil) {
         self.id = id
         self.name = name
         self.members = members
-        self.isGroup = isGroup
         self.senderId = senderId
+        self.senderDisplayName = senderDisplayName
         self.receiverId = receiverId
         self.lastMessage = lastMessage
     }
     
-    init(id: String,
-         name: String,
-         members: [String]) {
-        self.id = id
-        self.name = name
-        self.members = members
-    }
-
     init(snapshot: DataSnapshot) {
         self.id = snapshot.key
         if let value = snapshot.value as? [String: Any] {
             self.name = value[Fields.name] as? String
             self.members = value[Fields.members] as? [String]
-            self.isGroup = value[Fields.isGroup] as? Bool
+            self.type = value[Fields.type] as? String
             self.senderId = value[Fields.senderId] as? String
             self.receiverId = value[Fields.receiverId] as? String
             self.lastMessage = value[Fields.lastMessage] as? String
+            self.senderDisplayName = value[Fields.senderDisplayName] as? String
         }
     }
     
-    func toJSON() -> Any {
+    func toJSON() -> [String : Any?] {
         return [
-            Fields.members  : self.members,
-            Fields.name     : self.name,
-            Fields.senderId : self.senderId,
-            Fields.isGroup  : self.isGroup,
-            Fields.lastMessage : self.lastMessage,
-            Fields.receiverId   : self.receiverId
+            Fields.members              : self.members,
+            Fields.name                 : self.name,
+            Fields.senderId             : self.senderId,
+            Fields.type                 : self.type,
+            Fields.lastMessage          : self.lastMessage,
+            Fields.receiverId           : self.receiverId,
+            Fields.senderDisplayName    : self.senderDisplayName
         ]
     }
     
-    static func makeChannelId(from: String, to: String) -> String {
+    static func getId(from: String, to: String) -> String {
         return String((from + to).sorted())
     }
     
 }
 
-
 extension Channel {
+    /// create new channel
     static func createChannel(from: Contact, to: Contact) -> DatabaseReference? {
         if let channelRef: DatabaseReference = DBRef.channel.ref {
             
-            let key = Channel.makeChannelId(from: from.uid, to: to.uid)
+            let key = Channel.getId(from: from.uid, to: to.uid)
             
             let newRef = channelRef.child(key)
             
@@ -112,8 +114,9 @@ extension Channel {
         static let id       = "id"
         static let name     = "name"
         static let members  = "members"
-        static let isGroup  = "isGroup"
+        static let type  = "type"
         static let senderId  = "senderId"
+        static let senderDisplayName = "senderDisplayName"
         static let lastMessage  = "lastMessage"
         static let receiverId   = "receiverId"
     }

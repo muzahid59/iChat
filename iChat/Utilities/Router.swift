@@ -11,10 +11,11 @@ import UIKit
 
 struct Route {
     
+    /// set app tabbar controller
     static func setAppTabBarAsRoot() {
         print(#function)
         
-        let tabBarController: UITabBarController = {
+        let appTabBarController: UITabBarController = {
             let tabController = UITabBarController()
             tabController.tabBar.barTintColor = appBGColor
             tabController.tabBar.tintColor = .white
@@ -46,24 +47,26 @@ struct Route {
             profileVC
         ]
         
-        tabBarController.viewControllers = viewControllers.map {
+        appTabBarController.viewControllers = viewControllers.map {
             UINavigationController(rootViewController: $0)
         }
         
-        switchRootViewController(viewController: tabBarController,
+        switchRootViewController(viewController: appTabBarController,
                                  animated: true,
                                  completion: {
-                                    appDelegate.tabBarController = tabBarController
+                                    appDelegate.tabBarController = appTabBarController
         })
         
     }
     
+    /// Set login view controller as app root view controller
     static func setLoginVCAsRoot() {
         print(#function)
         let loginVC = UIStoryboard.storyBoard(storyBoard: .Main).instantiateViewController(withIdentifier: LoginVC.storyboardIdentifier) as! LoginVC
         switchRootViewController(viewController: loginVC, animated: true, completion: nil)
     }
     
+    /// transition animation during switching app window rootviewcontroller
     static func switchRootViewController(viewController: UIViewController,
                                          animated: Bool,
                                          options: UIViewAnimationOptions = .transitionCrossDissolve,
