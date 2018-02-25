@@ -62,7 +62,6 @@ internal struct Channel {
             self.members = value[Fields.members] as? [String]
             self.type = value[Fields.type] as? String
             self.senderId = value[Fields.senderId] as? String
-            self.receiverId = value[Fields.receiverId] as? String
             self.lastMessage = value[Fields.lastMessage] as? String
             self.senderDisplayName = value[Fields.senderDisplayName] as? String
         }
@@ -75,7 +74,6 @@ internal struct Channel {
             Fields.senderId             : self.senderId,
             Fields.type                 : self.type,
             Fields.lastMessage          : self.lastMessage,
-            Fields.receiverId           : self.receiverId,
             Fields.senderDisplayName    : self.senderDisplayName
         ]
     }
@@ -118,7 +116,6 @@ extension Channel {
         static let senderId  = "senderId"
         static let senderDisplayName = "senderDisplayName"
         static let lastMessage  = "lastMessage"
-        static let receiverId   = "receiverId"
     }
 }
 

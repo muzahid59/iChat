@@ -70,11 +70,11 @@ class ChatHomeVC: UITableViewController {
             
             for rest in (snapshot.children.allObjects as? [DataSnapshot])! {
                 
-                guard let value = rest.value as? [String: Any], let senderId = value[Channel.Fields.senderId] as? String, let receiverId = value[Channel.Fields.receiverId] as? String else {
+                guard let value = rest.value as? [String: Any], let senderId = value[Channel.Fields.senderId] as? String else {
                     print("snap data problem")
                     return
                 }
-                guard  (uid == senderId) || (uid == receiverId) else { return }
+              //  guard  (uid == senderId) || (uid == receiverId) else { return }
                 
                 if self.channels.contains(where: {$0.id == rest.key}){
                     for (index, channel) in self.channels.enumerated() {
@@ -90,30 +90,14 @@ class ChatHomeVC: UITableViewController {
                 
                // println(rest.value)
             }
-//            for value in values {
-//                if let senderId = value[Channel.Fields.senderId] as? String, let receiverId = value[Channel.Fields.receiverId] as? String {
-//                    if (uid == senderId) || (uid == receiverId) {
-//                        if self.channels.contains(where: {$0.id == value.key}){
-//                            for (index, channel) in self.channels.enumerated() {
-//                                if channel.id == value.key {
-//                                    self.channels[index] = Channel(snapshot: value)
-//                                    break
-//                                }
-//                            }
-//                        } else {
-//                            let channel = Channel(snapshot: value)
-//                            self.channels.append(channel)
-//                        }
-//                    }
-//                }
-//            }
-            
+
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
             
         })
+        /*
         channelRefHandle =  channelRef?.queryOrdered(byChild: Channel.Fields.receiverId).queryEqual(toValue: uid).observe(.childChanged, with: { (snapshot) in
             
             if self.channels.contains(where: {$0.id == snapshot.key}){
@@ -133,6 +117,7 @@ class ChatHomeVC: UITableViewController {
             }
             
         })
+        */
         
     }
     
@@ -164,11 +149,12 @@ class ChatHomeVC: UITableViewController {
         
         if (indexPath as NSIndexPath).section == Section.currentChannelsSection.rawValue {
             cell.displayNameLabel.text = channels[(indexPath as NSIndexPath).row].senderDisplayName
+            
             var channel =  channels[indexPath.row]
             
             var text: String? = channel.lastMessage
             
-            if channel.id == Session.loggedUser?.uid {
+            if channel.senderId == Session.loggedUser?.uid {
                 text = "You " + (channel.lastMessage ?? "")
             }
             cell.lastMessageLabel.text = channels[(indexPath as NSIndexPath).row].lastMessage
@@ -208,13 +194,24 @@ class ChatHomeVC: UITableViewController {
                 var toContact: Contact?
                 
                 if let channel = sender as? Channel {
-                    toContact = Contact(uid: channel.senderId!)
-                    toContact?.displayName = channel.senderDisplayName
+                    
+                    if let members = channel.members, let userId = Session.loggedUser?.uid {
+                        let newAry = members.filter{ $0 != userId }
+                        if newAry.count > 0 {
+                            let toContactId = newAry.first!
+                            toContact = Contact(uid: toContactId)
+                            toContact?.displayName = channel.senderDisplayName
+                        }
+                    }
+                    
                 } else if let contact = sender as? Contact {
                     toContact = contact
                 }
-                
-                chatViewController.toContact = toContact
+                guard let contact = toContact else {
+                    print("to contact id not found")
+                    return
+                }
+                chatViewController.toContact = contact
                 chatViewController.senderDisplayName = toContact?.displayName
             }
             

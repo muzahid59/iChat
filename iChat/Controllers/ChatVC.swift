@@ -322,8 +322,7 @@ extension ChatVC {
         // fire db message set values
         self.channelRef?.child(Channel.Fields.lastMessage).setValue(text)
         self.channelRef?.child(Channel.Fields.senderId).setValue(senderId)
-        self.channelRef?.child(Channel.Fields.receiverId).setValue(toContact?.uid)
-    self.channelRef?.child(Channel.Fields.senderDisplayName).setValue(Session.loggedUser?.displayName)
+         self.channelRef?.child(Channel.Fields.senderDisplayName).setValue(Session.loggedUser?.displayName)
 
     }
     
