@@ -14,7 +14,6 @@
         <array key="Avenir.ttc">
             <string>Avenir-Book</string>
             <string>Avenir-Heavy</string>
-            <string>Avenir-Light</string>
         </array>
     </customFonts>
     <scenes>
@@ -136,11 +135,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iChat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJ4-Jg-yxF">
-                                <rect key="frame" x="112" y="52" width="151" height="59"/>
+                                <rect key="frame" x="112.5" y="52" width="150.5" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="v6D-CD-M9E"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="64"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="64"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -468,7 +467,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="71B-V6-cCx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ybB-av-tXk">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="ybB-av-tXk">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="newChatButtonAction:" destination="uwt-CO-P3S" id="NDt-ze-7Bw"/>
@@ -511,6 +510,12 @@
                         <viewLayoutGuide key="safeArea" id="j0A-Kz-LDi"/>
                     </view>
                     <navigationItem key="navigationItem" id="MgY-xl-C7f">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vmM-wN-3GG">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="cancelAction:" destination="mKu-oC-TEj" id="dt9-LQ-NK5"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Zj0-Bm-ZaF">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>

@@ -17,14 +17,7 @@ import ImageIO
 final class ChatVC: JSQMessagesViewController {
     
     // channel properties
-    private lazy var channelRef: DatabaseReference? = {
-        var ref: DatabaseReference? = nil
-        if let fromContact = Session.loggedUser, let receiver = self.toContact {
-            let newRef = Channel.createChannel(from: fromContact, to: receiver)
-            return newRef
-        }
-        return nil
-    }()
+    private var channelRef: DatabaseReference?
     private var channelRefHanlde: DatabaseHandle?
     
     /// to whom message has to send
@@ -74,15 +67,15 @@ final class ChatVC: JSQMessagesViewController {
         super.viewDidLoad()
         
          self.navigationItem.setHidesBackButton(false, animated: false)
-        
+        self.channelRefHandle()
         self.senderId = Session.loggedUser?.uid
         self.senderDisplayName = Session.loggedUser?.displayName
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width: 40.0, height: 40.0)
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: 40.0, height: 40.0)
         
-        observerMessage()
+        
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
          appDelegate.tabBarController?.tabBar.isHidden = true
@@ -90,15 +83,36 @@ final class ChatVC: JSQMessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        observerMessage()
         observeTyping()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         removeObserver()
+      
+    }
+    
+    /// channel ref
+
+    func channelRefHandle() {
+            
+            if let fromContact = Session.loggedUser, let receiver = self.toContact {
+                
+                let channelId = Channel.getId(from: fromContact.uid, to: (toContact?.uid)!)
+                DBRef.channel.ref?.observeSingleEvent(of: .value, with: { (snapshot) in
+                    if snapshot.hasChild(channelId){
+                        self.channelRef = snapshot.childSnapshot(forPath: channelId).ref
+                    } else {
+                        self.channelRef = Channel.createChannel(from: fromContact, to: receiver)
+                    }
+                })
+                
+            }
         
     }
     
+    /// Remove observer
     func removeObserver()  {
         if let handler = newMessageHandle {
             messageRef?.removeObserver(withHandle: handler)
@@ -120,10 +134,10 @@ final class ChatVC: JSQMessagesViewController {
     
     private func observerMessage() {
         print(#function)
-        // messageRef = channelRef!.child("messages")
+        
         let messageQuery = messageRef?.queryLimited(toLast: 20)
         
-        // new message addition handle
+        // new message
         newMessageHandle = messageQuery?.queryOrdered(byChild: Message.Fields.channelId).queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { [weak self] (snapshot) in
             if let messageData = snapshot.value as? [String : Any] {
                 if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self?.toContact?.displayName {
@@ -131,8 +145,7 @@ final class ChatVC: JSQMessagesViewController {
                     self?.addMessage(withId: senderId, name: displyaName, text: text)
                     self?.finishReceivingMessage()
                     
-                }
-                else if let id = messageData[Message.Fields.senderId] as? String, let photoURL = messageData[Message.Fields.photoUrl] as? String  {
+                } else if let id = messageData[Message.Fields.senderId] as? String, let photoURL = messageData[Message.Fields.photoUrl] as? String  {
                     if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self?.senderId) {
                         self?.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                         if photoURL.hasPrefix("gs://") {
@@ -147,7 +160,7 @@ final class ChatVC: JSQMessagesViewController {
             }
         })
         
-        // update message handle
+        /// update message
         updatedMessageRefHandle = messageRef?.observe(.childChanged, with: {[weak self] (snapshot) in
             if let messageData = snapshot.value as? Dictionary<String, String> {
                 let key = snapshot.key
@@ -166,7 +179,6 @@ final class ChatVC: JSQMessagesViewController {
     
     
     // MARK:- Observer Typing
-
     private func observeTyping() {
         let typingIndicatorRef = self.channelRef?.child("typingIndicator")
         let userTypingRef = typingIndicatorRef?.child(senderId)
@@ -182,8 +194,6 @@ final class ChatVC: JSQMessagesViewController {
         }
     }
 
-
-    
     // MARK:- Add Message
     private func addMessage(withId id: String, name: String, text: String) {
         if let message = JSQMessage(senderId: id, displayName: name, text: text) {
@@ -310,7 +320,7 @@ final class ChatVC: JSQMessagesViewController {
     // MARK:- Deinit
 
     deinit {
-        print(#function, "chat vc")
+        print(#function, "ChatVC")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -341,6 +351,7 @@ extension ChatVC {
         self.channelRef?.child(Channel.Fields.lastMessage).setValue(text)
         self.channelRef?.child(Channel.Fields.senderId).setValue(senderId)
         self.channelRef?.child(Channel.Fields.senderDisplayName).setValue(Session.loggedUser?.displayName)
+        self.channelRef?.child(Channel.Fields.receiverDisplayName).setValue(toContact?.displayName)
 
     }
     
@@ -369,7 +380,7 @@ extension ChatVC {
 }
 
 
-// MARK:- didPressAccessoryButton
+// MARK:- PressAccessoryButton Action Handle
 
 extension ChatVC {
     

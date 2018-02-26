@@ -26,6 +26,7 @@
 		4AC69B5B202862E100B2736A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B5A202862E100B2736A /* ChatVC.swift */; };
 		4AC69B5F2028635500B2736A /* CreateChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC69B5E2028635500B2736A /* CreateChannelCell.swift */; };
 		4AC69B6420286E3000B2736A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */; };
+		4ACA069A20440BED0073FC1A /* ChatVC+FireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACA069920440BED0073FC1A /* ChatVC+FireBase.swift */; };
 		4ADDB230203989340022148E /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB22F203989330022148E /* ProfileHeaderView.swift */; };
 		4ADDB232203989790022148E /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDB231203989790022148E /* ProfileHeaderView.xib */; };
 		4ADDB234203AE6600022148E /* ImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDB233203AE6600022148E /* ImageViewExtensions.swift */; };
@@ -90,6 +91,7 @@
 		4AC69B5E2028635500B2736A /* CreateChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelCell.swift; sourceTree = "<group>"; };
 		4AC69B602028638D00B2736A /* iChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iChat.entitlements; sourceTree = "<group>"; };
 		4AC69B6320286E2F00B2736A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ACA069920440BED0073FC1A /* ChatVC+FireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatVC+FireBase.swift"; sourceTree = "<group>"; };
 		4ADDB22F203989330022148E /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		4ADDB231203989790022148E /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		4ADDB233203AE6600022148E /* ImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtensions.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				4AF6DB8E2031715800FB38EE /* PasswordVC.swift */,
 				4AF6DB902031717700FB38EE /* EmailVC.swift */,
 				4AC69B5A202862E100B2736A /* ChatVC.swift */,
+				4ACA069920440BED0073FC1A /* ChatVC+FireBase.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				4ADDB237203C19650022148E /* ChatHomeCell.swift in Sources */,
 				4ADDB234203AE6600022148E /* ImageViewExtensions.swift in Sources */,
 				4AC69B2C202860E000B2736A /* iChat.xcdatamodeld in Sources */,
+				4ACA069A20440BED0073FC1A /* ChatVC+FireBase.swift in Sources */,
 				4AF6DB8F2031715800FB38EE /* PasswordVC.swift in Sources */,
 				4AF6DB8B20304C3000FB38EE /* Session.swift in Sources */,
 				4A245EF9202AFA8600B0C855 /* DBRef.swift in Sources */,

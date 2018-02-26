@@ -49,6 +49,11 @@ class ChatHomeVC: UITableViewController {
         tableView.register(UINib(nibName: "ChatHomeCell", bundle: nil), forCellReuseIdentifier: "ChatHomeCell")
         tableView.tableFooterView = UIView()
         
+        //observeChannel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         observeChannel()
     }
     
@@ -74,7 +79,6 @@ class ChatHomeVC: UITableViewController {
                     print("snap data problem")
                     return
                 }
-              //  guard  (uid == senderId) || (uid == receiverId) else { return }
                 
                 if self.channels.contains(where: {$0.id == rest.key}){
                     for (index, channel) in self.channels.enumerated() {
@@ -148,16 +152,20 @@ class ChatHomeVC: UITableViewController {
         let cell: ChatHomeCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ChatHomeCell
         
         if (indexPath as NSIndexPath).section == Section.currentChannelsSection.rawValue {
-            cell.displayNameLabel.text = channels[(indexPath as NSIndexPath).row].senderDisplayName
             
-            var channel =  channels[indexPath.row]
-            
-            var text: String? = channel.lastMessage
-            
+            let channel =  channels[indexPath.row]
+            var displayName: String?
+            var lastMessage: String?
             if channel.senderId == Session.loggedUser?.uid {
-                text = "You " + (channel.lastMessage ?? "")
+                lastMessage = "You: " + (channel.lastMessage ?? "")
+                displayName = channel.receiverDisplayName
+            } else {
+                lastMessage = channel.lastMessage
+                displayName = channel.senderDisplayName
             }
-            cell.lastMessageLabel.text = channels[(indexPath as NSIndexPath).row].lastMessage
+            
+            cell.lastMessageLabel.text = lastMessage
+            cell.displayNameLabel.text = displayName
         }
         
         return cell
@@ -167,9 +175,19 @@ class ChatHomeVC: UITableViewController {
         
         if indexPath.section == Section.currentChannelsSection.rawValue {
             let channel = self.channels[indexPath.row]
-            if Session.loggedUser != nil {
-                self.performSegue(withIdentifier: SegueIdentifier.ShowChat.rawValue, sender: channel)
+            var toContact: Contact?
+            if let members = channel.members, let userId = Session.loggedUser?.uid {
+                let newAry = members.filter{ $0 != userId }
+                if newAry.count > 0 {
+                    let toContactId = newAry.first!
+                    
+                    DBRef.contact.ref?.child(toContactId).observeSingleEvent(of: .value, with: { (snapshot) in
+                        toContact = Contact(snapshot: snapshot)
+                         self.performSegue(withIdentifier: SegueIdentifier.ShowChat.rawValue, sender: toContact)
+                    })
+                }
             }
+           
         }
     }
     
@@ -199,20 +217,20 @@ class ChatHomeVC: UITableViewController {
                         let newAry = members.filter{ $0 != userId }
                         if newAry.count > 0 {
                             let toContactId = newAry.first!
-                            toContact = Contact(uid: toContactId)
-                            toContact?.displayName = channel.senderDisplayName
+                            DBRef.contact.ref?.child(toContactId).observe(.value, with: { (snapshot) in
+                                toContact = Contact(snapshot: snapshot)
+                                chatViewController.toContact = toContact
+                                chatViewController.senderDisplayName = toContact?.displayName
+                            })
                         }
                     }
                     
                 } else if let contact = sender as? Contact {
                     toContact = contact
+                    chatViewController.toContact = contact
+                    chatViewController.senderDisplayName = toContact?.displayName
                 }
-                guard let contact = toContact else {
-                    print("to contact id not found")
-                    return
-                }
-                chatViewController.toContact = contact
-                chatViewController.senderDisplayName = toContact?.displayName
+                
             }
             
             

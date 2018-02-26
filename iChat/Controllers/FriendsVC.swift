@@ -40,7 +40,8 @@ class FriendsVC: UIViewController {
             contactRef?.removeObserver(withHandle: refhandler)
         }
     }
-    // MARK:- FireBase Related Methods
+    
+    // MARK:- Contact observer
     
     private func observeContacts() {
         contactRefHandle = contactRef?.observe(.childAdded, with: { (snapshot) in
@@ -55,16 +56,25 @@ class FriendsVC: UIViewController {
         })
     }
     
+    // MARK:- Action
+
+    @IBAction func cancelAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func doneButtonDidPressed(_ sender: Any) {
         if let row = selectedRow {
             didFinish?(contacts[row])
         }
-//        dismiss(animated: true, completion: nil)
     }
+    
+    // MARK:- deinit
+    
     deinit {
         
         print("Friends ", #function)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,7 +103,6 @@ extension FriendsVC: UITableViewDataSource, UITableViewDelegate {
         return contacts.count
     }
     
-    // 3
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reuseIdentifier = "FriendsCell"
         let cell: FriendsCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FriendsCell
@@ -105,6 +114,5 @@ extension FriendsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow = indexPath.row
         tableView.reloadData()
-      //  doneButtonDidPressed(self)
     }
 }

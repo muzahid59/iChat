@@ -32,6 +32,7 @@ internal struct Channel {
     var type: String? = ChatType.Chat.rawValue
     var senderId: String?
     var senderDisplayName: String?
+    var receiverDisplayName: String?
     var receiverId: String?
     var lastMessage: String?
     
@@ -44,6 +45,7 @@ internal struct Channel {
          members: [String]? = [],
          senderId: String? = nil,
          senderDisplayName: String? = nil,
+         receiverDisplayName: String? = nil,
          receiverId: String? = nil,
          lastMessage: String? = nil) {
         self.id = id
@@ -51,6 +53,7 @@ internal struct Channel {
         self.members = members
         self.senderId = senderId
         self.senderDisplayName = senderDisplayName
+        self.receiverDisplayName = receiverDisplayName
         self.receiverId = receiverId
         self.lastMessage = lastMessage
     }
@@ -64,6 +67,7 @@ internal struct Channel {
             self.senderId = value[Fields.senderId] as? String
             self.lastMessage = value[Fields.lastMessage] as? String
             self.senderDisplayName = value[Fields.senderDisplayName] as? String
+            self.receiverDisplayName = value[Fields.receiverDisplayName] as? String
         }
     }
     
@@ -74,7 +78,8 @@ internal struct Channel {
             Fields.senderId             : self.senderId,
             Fields.type                 : self.type,
             Fields.lastMessage          : self.lastMessage,
-            Fields.senderDisplayName    : self.senderDisplayName
+            Fields.senderDisplayName    : self.senderDisplayName,
+            Fields.receiverDisplayName  : self.receiverDisplayName
         ]
     }
     
@@ -87,10 +92,10 @@ internal struct Channel {
 extension Channel {
     /// create new channel
     static func createChannel(from: Contact, to: Contact) -> DatabaseReference? {
+        
         if let channelRef: DatabaseReference = DBRef.channel.ref {
             
             let key = Channel.getId(from: from.uid, to: to.uid)
-            
             let newRef = channelRef.child(key)
             
             var channel = Channel(id: key)
@@ -115,6 +120,7 @@ extension Channel {
         static let type  = "type"
         static let senderId  = "senderId"
         static let senderDisplayName = "senderDisplayName"
+        static let receiverDisplayName = "receiverDisplayName"
         static let lastMessage  = "lastMessage"
     }
 }
