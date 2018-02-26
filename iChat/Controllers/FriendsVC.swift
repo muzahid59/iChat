@@ -14,7 +14,7 @@ class FriendsVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     private var contacts: [Contact] = []
-    private lazy var contactRef: DatabaseReference = Database.database().reference().child(DBRef.contact.rawValue)
+    private lazy var contactRef: DatabaseReference? = DBRef.contact.ref 
     private var contactRefHandle: DatabaseHandle?
     
     public var didFinish: ((Contact) -> Void)?
@@ -26,14 +26,24 @@ class FriendsVC: UIViewController {
 
         tableView.register(UINib(nibName: "FriendsCell", bundle: nil), forCellReuseIdentifier: "FriendsCell")
         tableView.tableFooterView = UIView()
-        observeContacts()
-        // Do any additional setup after loading the view.
+        
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        observeContacts()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let refhandler = contactRefHandle {
+            contactRef?.removeObserver(withHandle: refhandler)
+        }
+    }
     // MARK:- FireBase Related Methods
     
     private func observeContacts() {
-        contactRefHandle = contactRef.observe(.childAdded, with: { (snapshot) in
+        contactRefHandle = contactRef?.observe(.childAdded, with: { (snapshot) in
             let contact = snapshot.asContact()
             if contact.uid != Session.loggedUser?.uid {
                 self.contacts.append(contact)
@@ -49,8 +59,12 @@ class FriendsVC: UIViewController {
         if let row = selectedRow {
             didFinish?(contacts[row])
         }
+//        dismiss(animated: true, completion: nil)
     }
-    
+    deinit {
+        
+        print("Friends ", #function)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

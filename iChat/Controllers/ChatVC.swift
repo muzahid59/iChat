@@ -25,6 +25,7 @@ final class ChatVC: JSQMessagesViewController {
         }
         return nil
     }()
+    private var channelRefHanlde: DatabaseHandle?
     
     /// to whom message has to send
     var toContact: Contact? {
@@ -39,8 +40,9 @@ final class ChatVC: JSQMessagesViewController {
     private var updatedMessageRefHandle: DatabaseHandle?
     
     // message typing DB connection
-    private lazy var userIsTypingRef: DatabaseReference = self.channelRef!.child(DBRef.typingIndicator.rawValue).child(self.senderId)
-    private lazy var userTypingQuery: DatabaseQuery = self.channelRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
+    private lazy var userIsTypingRef: DatabaseReference? = self.channelRef?.child(DBRef.typingIndicator.rawValue).child(self.senderId)
+    private var typingHanlder: DatabaseHandle?
+    private lazy var userTypingQuery: DatabaseQuery? = self.channelRef?.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
     
     // Storage connection
     private lazy var storageRef: StorageReference = Storage.storage().reference(forURL: "gs://ichat-7223f.appspot.com/")
@@ -57,7 +59,7 @@ final class ChatVC: JSQMessagesViewController {
         }
         set {
             self.localTyping = newValue
-            userIsTypingRef.setValue(newValue)
+            userIsTypingRef?.setValue(newValue)
         }
     }
     
@@ -78,7 +80,6 @@ final class ChatVC: JSQMessagesViewController {
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width: 40.0, height: 40.0)
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: 40.0, height: 40.0)
         
-       // observeMessages()
         observerMessage()
     }
     
@@ -92,6 +93,29 @@ final class ChatVC: JSQMessagesViewController {
         observeTyping()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeObserver()
+        
+    }
+    
+    func removeObserver()  {
+        if let handler = newMessageHandle {
+            messageRef?.removeObserver(withHandle: handler)
+        }
+        if let handler = channelRefHanlde {
+            channelRef?.removeObserver(withHandle: handler)
+        }
+        if let handler = newMessageHandle {
+            messageRef?.removeObserver(withHandle: handler)
+        }
+        if let handler = typingHanlder {
+            userTypingQuery?.removeObserver(withHandle: handler)
+        }
+        
+    }
+    
+    
     // MARK:- Observe Messages
     
     private func observerMessage() {
@@ -100,19 +124,19 @@ final class ChatVC: JSQMessagesViewController {
         let messageQuery = messageRef?.queryLimited(toLast: 20)
         
         // new message addition handle
-        newMessageHandle = messageQuery?.queryOrdered(byChild: Message.Fields.channelId).queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { (snapshot) in
+        newMessageHandle = messageQuery?.queryOrdered(byChild: Message.Fields.channelId).queryEqual(toValue: channelRef?.key).observe(.childAdded, with: { [weak self] (snapshot) in
             if let messageData = snapshot.value as? [String : Any] {
-                if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self.toContact?.displayName {
+                if let text = messageData[Message.Fields.text] as? String, text.count > 0, let senderId = messageData[Message.Fields.senderId] as? String, let displyaName = self?.toContact?.displayName {
                     
-                    self.addMessage(withId: senderId, name: displyaName, text: text)
-                    self.finishReceivingMessage()
+                    self?.addMessage(withId: senderId, name: displyaName, text: text)
+                    self?.finishReceivingMessage()
                     
                 }
                 else if let id = messageData[Message.Fields.senderId] as? String, let photoURL = messageData[Message.Fields.photoUrl] as? String  {
-                    if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self.senderId) {
-                        self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self?.senderId) {
+                        self?.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                         if photoURL.hasPrefix("gs://") {
-                            self.fetchImageDataAtURL(photoURL: photoURL, forMediaItem: mediaItem, clearPhotoMessageMapOnSuccessForKey: nil)
+                            self?.fetchImageDataAtURL(photoURL: photoURL, forMediaItem: mediaItem, clearPhotoMessageMapOnSuccessForKey: nil)
                         }
                         
                     }
@@ -148,7 +172,7 @@ final class ChatVC: JSQMessagesViewController {
         let userTypingRef = typingIndicatorRef?.child(senderId)
         userTypingRef?.onDisconnectRemoveValue()
         
-        userTypingQuery.observe(.value) { (snapshot) in
+      typingHanlder =  userTypingQuery?.observe(.value) { (snapshot) in
             if snapshot.childrenCount == 1 && self.isTyping {
                 print("self typing...")
                 return
@@ -287,12 +311,6 @@ final class ChatVC: JSQMessagesViewController {
 
     deinit {
         print(#function, "chat vc")
-        if let refHandle = newMessageHandle {
-            messageRef?.removeObserver(withHandle: refHandle)
-        }
-        if let refHandle = updatedMessageRefHandle {
-            messageRef?.removeObserver(withHandle: refHandle)
-        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -322,7 +340,7 @@ extension ChatVC {
         // fire db message set values
         self.channelRef?.child(Channel.Fields.lastMessage).setValue(text)
         self.channelRef?.child(Channel.Fields.senderId).setValue(senderId)
-         self.channelRef?.child(Channel.Fields.senderDisplayName).setValue(Session.loggedUser?.displayName)
+        self.channelRef?.child(Channel.Fields.senderDisplayName).setValue(Session.loggedUser?.displayName)
 
     }
     
