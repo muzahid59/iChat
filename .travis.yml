@@ -1,0 +1,5 @@
+language: objective-c  
+osx_image: xcode6.4 
+xcode_workspace: iChat.xcworkspace
+xcode_scheme: iChat 
+xcode_sdk: iphonesimulator11.2 
