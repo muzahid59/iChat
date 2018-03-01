@@ -7,7 +7,7 @@
 iChat is a sample real time text messaging app. Google firebase is used as back end service.
 
 <h3 align="center">
-<img src="screenshot.gif" alt="Screenshot of iChat" />
+<img src="screenshot.png" alt="Screenshot of iChat" />
 </h3>
 
 ## Getting Started
