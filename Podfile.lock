@@ -1,14 +1,14 @@
 PODS:
-  - Firebase/Auth (4.8.2):
+  - Firebase/Auth (4.9.0):
     - Firebase/Core
-    - FirebaseAuth (= 4.4.2)
-  - Firebase/Core (4.8.2):
+    - FirebaseAuth (= 4.4.3)
+  - Firebase/Core (4.9.0):
     - FirebaseAnalytics (= 4.0.9)
-    - FirebaseCore (= 4.0.14)
-  - Firebase/Database (4.8.2):
+    - FirebaseCore (= 4.0.15)
+  - Firebase/Database (4.9.0):
     - Firebase/Core
     - FirebaseDatabase (= 4.1.4)
-  - Firebase/Storage (4.8.2):
+  - Firebase/Storage (4.9.0):
     - Firebase/Core
     - FirebaseStorage (= 2.1.2)
   - FirebaseAnalytics (4.0.9):
@@ -16,17 +16,17 @@ PODS:
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseAuth (4.4.2):
+  - FirebaseAuth (4.4.3):
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.14):
+  - FirebaseCore (4.0.15):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseDatabase (4.1.4):
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - leveldb-library (~> 1.18)
-  - FirebaseInstanceID (2.0.8):
+  - FirebaseInstanceID (2.0.9):
     - FirebaseCore (~> 4.0)
   - FirebaseStorage (2.1.2):
     - FirebaseAnalytics (~> 4.0)
@@ -42,7 +42,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
-  - GTMSessionFetcher/Core (1.1.13)
+  - GTMSessionFetcher/Core (1.1.14)
   - IQKeyboardManagerSwift (5.0.7)
   - JSQMessagesViewController (7.3.5):
     - JSQSystemSoundPlayer (~> 2.0.1)
@@ -62,21 +62,21 @@ DEPENDENCIES:
   - JSQMessagesViewController
 
 SPEC CHECKSUMS:
-  Firebase: 7d3b8cd837ad9fcd391657734c0d56dab8e9a5a3
+  Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
   FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
-  FirebaseAuth: bd2738c5c1e92b108ba5f7f7335908097a4e50bb
-  FirebaseCore: 2e0b98fb2d64ca8140136beff15772bdd14d2dd7
+  FirebaseAuth: aaaf68d5064a6c8fec435758f83a43b8db26ccaa
+  FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
   FirebaseDatabase: de4446507ccd3257fca37d16f40e1540324571fd
-  FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
+  FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
   FirebaseStorage: 181bb543d39ee3c53e0558de7ba86b1286a0427f
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  GTMSessionFetcher: 5bb1eae636127de695590f50e7d248483eb891e6
+  GTMSessionFetcher: 390ea358e5a0d0133153806f744662dad933d06b
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: 3115abf863c2a2207c181488aafee0fa0eb6e1d2
+PODFILE CHECKSUM: e9c276232d897c2b97638d6955f3b1585baa2481
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0
